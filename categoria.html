@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Categoría — Vortex Crew</title>
+<meta name="description" content="Vortex Crew — catálogo por categoría. Filtra por talla y color, ordena por precio o novedad." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23ff4b1f%22>V</text></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ============ Announcement bar ============ -->
+<div class="announce">
+  <div class="announce-track" aria-hidden="true">
+    <span>Envío gratis en compras sobre $50.000</span>
+    <span>Retiro gratis en tienda · Santiago</span>
+    <span>Nueva colección Vortex disponible</span>
+    <span>Envío gratis en compras sobre $50.000</span>
+    <span>Retiro gratis en tienda · Santiago</span>
+    <span>Nueva colección Vortex disponible</span>
+  </div>
+</div>
+
+<!-- ============ Header ============ -->
+<header class="site-header is-solid" id="siteHeader">
+  <div class="container">
+    <a href="index.html" class="logo">VORTEX<span class="dot">·</span>CREW</a>
+
+    <nav class="nav-desktop">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#destacados">Catálogo</a>
+      <a href="index.html#categorias">Categorías</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="index.html#footer">Contacto</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn hide-mobile" id="searchBtn" aria-label="Buscar" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" id="cartBtn" aria-label="Carrito" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ Mobile nav ============ -->
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#destacados">Catálogo</a>
+  <a href="index.html#categorias">Categorías</a>
+  <a href="index.html#nosotros">Nosotros</a>
+  <a href="index.html#footer">Contacto</a>
+  <div class="nav-mobile-foot">
+    Vortex Crew<br />
+    hola@vortexcrew.cl · +56 9 1234 5678
+  </div>
+</div>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="index.html">Inicio</a>
+    <span class="sep">/</span>
+    <span class="current" id="breadcrumbCurrent">Categoría</span>
+  </nav>
+</div>
+
+<!-- ============ Category hero ============ -->
+<section class="category-hero">
+  <div class="container">
+    <p class="eyebrow">Catálogo</p>
+    <h1 class="category-title" id="categoryTitle">Categoría</h1>
+    <p class="category-desc">Piezas técnicas Vortex Crew para esta categoría. Filtra por talla o color, y ordena como prefieras.</p>
+  </div>
+</section>
+
+<!-- ============ Category listing ============ -->
+<section class="category-section">
+  <div class="container">
+
+    <div class="category-toolbar">
+      <p class="category-count" id="categoryCount"><strong>0</strong> productos</p>
+      <div class="sort-control">
+        <label for="sortSelect">Ordenar por</label>
+        <select id="sortSelect">
+          <option value="relevancia">Relevancia</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nuevos">Más nuevos</option>
+          <option value="alfabetico">Alfabético A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-group-label">Talla</span>
+        <div id="sizeFilters"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">Color</span>
+        <div id="colorFilters" style="display:flex; gap:10px;"></div>
+      </div>
+      <button type="button" class="filter-clear" id="filterClear" hidden>Limpiar filtros</button>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="category-empty" id="categoryEmpty" hidden>
+      <h3>No se encontraron productos</h3>
+      <p>Prueba quitando algún filtro de talla o color.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">VORTEX<span class="dot">·</span>CREW</a>
+        <p>Indumentaria técnica de ciclismo. Diseñada para rodar sin límites, en ruta o en montaña.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="Strava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="index.html#destacados">Destacados</a></li>
+          <li><a href="index.html#categorias">Categorías</a></li>
+          <li><a href="producto.html">Producto ejemplo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de talles</a></li>
+          <li><a href="#">Envíos y devoluciones</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>hola@vortexcrew.cl</li>
+          <li>+56 9 1234 5678</li>
+          <li>Santiago, Chile</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Vortex Crew. Demo de visualización — contenido de ejemplo.</span>
+      <span><a href="#">Términos</a> · <a href="#">Privacidad</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ Search overlay ============ -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" id="searchClose" aria-label="Cerrar búsqueda" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="search-panel">
+    <form class="search-box" id="searchForm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar tricotas, calzas, guantes..." autocomplete="off" />
+    </form>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ============ Toast ============ -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span id="toastMsg">Producto agregado</span>
+</div>
+
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/categoria.js"></script>
+</body>
+</html>

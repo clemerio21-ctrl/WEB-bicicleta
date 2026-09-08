@@ -38,7 +38,7 @@
     </nav>
 
     <div class="header-actions">
-      <button class="icon-btn hide-mobile" aria-label="Buscar" type="button">
+      <button class="icon-btn hide-mobile" id="searchBtn" aria-label="Buscar" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
       <button class="icon-btn" id="cartBtn" aria-label="Carrito" type="button">
@@ -375,7 +375,7 @@
     </div>
 
     <div class="products-foot" data-reveal>
-      <a href="producto.html" class="btn btn-dark">Ver todo el catálogo</a>
+      <a href="categoria.html?cat=todos" class="btn btn-dark">Ver todo el catálogo</a>
     </div>
   </div>
 </section>
@@ -392,30 +392,30 @@
     </div>
 
     <div class="cat-grid">
-      <a href="producto.html" class="cat-card" data-reveal>
+      <a href="categoria.html?cat=tricotas" class="cat-card" data-reveal>
         <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=75" alt="Grupo de ciclistas de ruta con tricotas Vortex" loading="lazy" />
         <div class="cat-tag">
-          <span class="cat-count">12 productos</span>
+          <span class="cat-count">5 productos</span>
           <h3>Tricotas y Jerseys</h3>
           <span class="cat-link">Ver categoría
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
       </a>
-      <a href="producto.html" class="cat-card" data-reveal>
+      <a href="categoria.html?cat=calzas" class="cat-card" data-reveal>
         <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=900&q=75" alt="Ciclistas rodando con calzas aero Vortex" loading="lazy" />
         <div class="cat-tag">
-          <span class="cat-count">9 productos</span>
+          <span class="cat-count">4 productos</span>
           <h3>Calzas y Shorts</h3>
           <span class="cat-link">Ver categoría
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
       </a>
-      <a href="producto.html" class="cat-card" data-reveal>
+      <a href="categoria.html?cat=mtb" class="cat-card" data-reveal>
         <img src="https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?auto=format&fit=crop&w=900&q=75" alt="Ciclista de montaña cruzando un río" loading="lazy" />
         <div class="cat-tag">
-          <span class="cat-count">7 productos</span>
+          <span class="cat-count">4 productos</span>
           <h3>MTB &amp; Gravel</h3>
           <span class="cat-link">Ver categoría
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -511,12 +511,27 @@
   </div>
 </footer>
 
+<!-- ============ Search overlay ============ -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" id="searchClose" aria-label="Cerrar búsqueda" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="search-panel">
+    <form class="search-box" id="searchForm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar tricotas, calzas, guantes..." autocomplete="off" />
+    </form>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
 <!-- ============ Toast ============ -->
 <div class="toast" id="toast">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
   <span id="toastMsg">Producto agregado</span>
 </div>
 
+<script src="js/products.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

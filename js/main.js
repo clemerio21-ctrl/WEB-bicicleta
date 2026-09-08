@@ -36,6 +36,100 @@
     });
   }
 
+  /* ---------- Search overlay ---------- */
+  var searchBtns = document.querySelectorAll('#searchBtn');
+  var searchOverlay = document.getElementById('searchOverlay');
+  var searchInput = document.getElementById('searchInput');
+  var searchResults = document.getElementById('searchResults');
+  var searchClose = document.getElementById('searchClose');
+  var searchForm = document.getElementById('searchForm');
+
+  function renderSearchResults(query) {
+    if (!searchResults || !window.VORTEX_CATALOG) return;
+    var catalog = window.VORTEX_CATALOG;
+    var q = query.trim().toLowerCase();
+    searchResults.innerHTML = '';
+
+    if (!q) {
+      searchResults.innerHTML = '<p class="search-hint">Prueba con "tricota", "calzas", "mtb"...</p>';
+      return;
+    }
+    var matches = catalog.products.filter(function (p) {
+      var inName = p.name.toLowerCase().indexOf(q) !== -1;
+      var inCategory = p.category.some(function (c) {
+        return (catalog.categoryLabels[c] || c).toLowerCase().indexOf(q) !== -1;
+      });
+      return inName || inCategory;
+    }).slice(0, 8);
+
+    if (!matches.length) {
+      var empty = document.createElement('p');
+      empty.className = 'search-empty';
+      empty.textContent = 'Sin resultados para "' + query.trim() + '".';
+      searchResults.appendChild(empty);
+      return;
+    }
+    matches.forEach(function (p) {
+      var a = document.createElement('a');
+      a.className = 'search-result';
+      a.href = 'categoria.html?cat=' + encodeURIComponent(p.category[0]);
+      var color = p.colors[0] ? p.colors[0].hex : '#0a0a0c';
+
+      var swatch = document.createElement('span');
+      swatch.className = 'swatch';
+      swatch.style.background = color;
+
+      var info = document.createElement('span');
+      info.className = 'info';
+      var name = document.createElement('span');
+      name.className = 'name';
+      name.textContent = p.name;
+      var cat = document.createElement('span');
+      cat.className = 'cat';
+      cat.textContent = catalog.categoryLabels[p.category[0]] || '';
+      info.appendChild(name);
+      info.appendChild(cat);
+
+      var price = document.createElement('span');
+      price.className = 'price';
+      price.textContent = catalog.formatPrice(p.price);
+
+      a.appendChild(swatch);
+      a.appendChild(info);
+      a.appendChild(price);
+      searchResults.appendChild(a);
+    });
+  }
+
+  function openSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    renderSearchResults(searchInput ? searchInput.value : '');
+    setTimeout(function () { searchInput && searchInput.focus(); }, 60);
+  }
+  function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  searchBtns.forEach(function (btn) { btn.addEventListener('click', openSearch); });
+  if (searchClose) searchClose.addEventListener('click', closeSearch);
+  if (searchOverlay) {
+    searchOverlay.addEventListener('click', function (e) {
+      if (e.target === searchOverlay) closeSearch();
+    });
+  }
+  if (searchForm) searchForm.addEventListener('submit', function (e) { e.preventDefault(); });
+  if (searchInput) {
+    searchInput.addEventListener('input', function () { renderSearchResults(searchInput.value); });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('is-open')) {
+      closeSearch();
+    }
+  });
+
   /* ---------- Hero video: load only on desktop / no reduced-motion ---------- */
   var heroVideo = document.getElementById('heroVideo');
   var heroPoster = document.getElementById('heroPoster');
