@@ -20,24 +20,6 @@
   var announce = document.querySelector('.announce');
   if (!announce) header && header.classList.add('no-announce');
 
-  /* ---------- Hero title/CTA fade out as soon as scrolling starts ---------- */
-  /* Leaves just the fixed video/poster visible behind, no text on top of it. */
-  var heroContent = document.querySelector('.hero-content');
-  var heroScrollHint = document.querySelector('.hero-scroll');
-  if (heroContent) {
-    var HERO_FADE_DISTANCE = 200;
-    var updateHeroFade = function () {
-      var progress = Math.min(Math.max(window.scrollY / HERO_FADE_DISTANCE, 0), 1);
-      var opacity = 1 - progress;
-      heroContent.style.opacity = opacity;
-      heroContent.style.transform = 'translateY(' + (progress * 24) + 'px)';
-      heroContent.style.pointerEvents = progress >= 1 ? 'none' : '';
-      if (heroScrollHint) heroScrollHint.style.opacity = opacity;
-    };
-    window.addEventListener('scroll', updateHeroFade, { passive: true });
-    updateHeroFade();
-  }
-
   /* ---------- Mobile nav ---------- */
   var navToggle = document.getElementById('navToggle');
   var navMobile = document.getElementById('navMobile');
