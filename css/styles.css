@@ -451,6 +451,7 @@ h1, h2, h3, h4 {
   width: 100%;
   padding: 0 24px 88px;
   color: var(--c-white);
+  transition: opacity 0.15s linear, transform 0.15s linear;
 }
 @media (min-width: 768px) { .hero-content { padding: 0 40px 110px; } }
 
@@ -486,6 +487,7 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 10px;
   color: var(--c-white);
+  transition: opacity 0.15s linear;
 }
 @media (min-width: 768px) { .hero-scroll { display: flex; } }
 .hero-scroll span {
