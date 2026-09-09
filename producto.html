@@ -330,6 +330,26 @@
   <span id="toastMsg">Producto agregado</span>
 </div>
 
+<!-- ============ Contact float ============ -->
+<button class="contact-float" id="contactFloatBtn" aria-label="¿Tienes una pregunta? Escríbenos" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="contact-panel" id="contactPanel">
+  <div class="contact-panel-head">
+    <span>¿Tienes una pregunta?</span>
+    <button class="contact-panel-close" id="contactPanelClose" aria-label="Cerrar" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <p class="contact-panel-hint">Escríbenos y te respondemos a la brevedad.</p>
+  <form id="contactForm" class="contact-form">
+    <input type="text" name="nombre" placeholder="Tu nombre" required />
+    <input type="email" name="correo" placeholder="Tu correo" required />
+    <textarea name="mensaje" placeholder="Escribe tu pregunta..." rows="3" required></textarea>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>
+
 <script src="js/products.js"></script>
 <script src="js/main.js"></script>
 </body>

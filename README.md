@@ -75,6 +75,12 @@ Con eso, al apretar "Comprar ahora" se crea una orden real en Mercado Pago y red
 
 Cuando estén listos para cobrar plata de verdad, se reemplaza el Access Token de prueba por el de **producción** (mismo panel de Mercado Pago) — no hay que tocar código.
 
+## Botón flotante de consultas (correo)
+
+Aparece en las 3 páginas, abajo a la derecha. Al escribir y apretar "Enviar" abre el programa de correo del visitante con un mensaje prellenado (nombre, correo del visitante y su pregunta) dirigido al negocio.
+
+Todavía no tiene correo de destino configurado a propósito. Para activarlo: en `js/main.js`, buscar la línea `var CONTACT_EMAIL = '';` (cerca del comentario "Contact float") y poner el correo real entre las comillas, ej. `var CONTACT_EMAIL = 'hola@vortexcrew.cl';`. Mientras esté vacío, el botón avisa que falta configurarlo en vez de fallar en silencio.
+
 ## Próximos pasos (fuera del alcance de esta demo)
 
 - Conectar Mercado Pago al resto de los productos del catálogo (hoy solo el de `producto.html` está conectado) y al botón "Agregar al carrito" con un carrito real de varios productos.

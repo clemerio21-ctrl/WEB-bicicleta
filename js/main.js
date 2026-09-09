@@ -130,6 +130,59 @@
     }
   });
 
+  /* ---------- Contact float (mensaje flotante a correo) ----------
+     TODO: completar con el correo real del negocio cuando lo definan
+     (ej. 'hola@vortexcrew.cl'). Mientras esté vacío, el botón avisa
+     que falta configurarlo en vez de fallar en silencio. */
+  var CONTACT_EMAIL = '';
+
+  var contactFloatBtn = document.getElementById('contactFloatBtn');
+  var contactPanel = document.getElementById('contactPanel');
+  var contactPanelClose = document.getElementById('contactPanelClose');
+  var contactForm = document.getElementById('contactForm');
+
+  function toggleContactPanel(open) {
+    if (!contactPanel) return;
+    contactPanel.classList.toggle('is-open', open);
+    if (contactFloatBtn) contactFloatBtn.classList.toggle('is-open', open);
+  }
+  if (contactFloatBtn) {
+    contactFloatBtn.addEventListener('click', function () {
+      toggleContactPanel(!contactPanel.classList.contains('is-open'));
+    });
+  }
+  if (contactPanelClose) {
+    contactPanelClose.addEventListener('click', function () { toggleContactPanel(false); });
+  }
+  document.addEventListener('click', function (e) {
+    if (!contactPanel || !contactPanel.classList.contains('is-open')) return;
+    if (contactPanel.contains(e.target) || (contactFloatBtn && contactFloatBtn.contains(e.target))) return;
+    toggleContactPanel(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && contactPanel && contactPanel.classList.contains('is-open')) {
+      toggleContactPanel(false);
+    }
+  });
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!CONTACT_EMAIL) {
+        showToast('Falta configurar el correo de contacto (CONTACT_EMAIL en js/main.js).');
+        return;
+      }
+      var nombre = contactForm.nombre.value.trim();
+      var correo = contactForm.correo.value.trim();
+      var mensaje = contactForm.mensaje.value.trim();
+      var subject = 'Consulta desde la web — ' + nombre;
+      var body = mensaje + '\n\nCorreo de contacto: ' + correo;
+      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      showToast('Abriendo tu programa de correo...');
+      contactForm.reset();
+      toggleContactPanel(false);
+    });
+  }
+
   /* ---------- Hero video: plays on any screen size, skipped only for reduced-motion ---------- */
   var heroVideo = document.getElementById('heroVideo');
   var heroPoster = document.getElementById('heroPoster');
