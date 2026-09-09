@@ -130,16 +130,14 @@
     }
   });
 
-  /* ---------- Hero video: load only on desktop / no reduced-motion ---------- */
+  /* ---------- Hero video: plays on any screen size, skipped only for reduced-motion ---------- */
   var heroVideo = document.getElementById('heroVideo');
   var heroPoster = document.getElementById('heroPoster');
   if (heroVideo) {
-    var mqDesktop = window.matchMedia('(min-width: 768px)');
     var mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function setupHeroMedia() {
-      var shouldPlayVideo = mqDesktop.matches && !mqReduced.matches;
-      if (shouldPlayVideo) {
+      if (!mqReduced.matches) {
         var source = heroVideo.querySelector('source');
         if (source && !source.src) {
           source.src = source.getAttribute('data-src');
@@ -157,7 +155,7 @@
     }
     heroVideo.style.display = 'none';
     setupHeroMedia();
-    mqDesktop.addEventListener('change', setupHeroMedia);
+    mqReduced.addEventListener('change', setupHeroMedia);
   }
 
   /* ---------- Scroll reveal ---------- */

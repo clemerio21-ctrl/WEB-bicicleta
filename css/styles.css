@@ -445,6 +445,17 @@ h1, h2, h3, h4 {
     linear-gradient(90deg, rgba(8,8,9,0.55) 0%, rgba(8,8,9,0.05) 55%);
 }
 
+/* On phones, skip the fixed/pinned background trick entirely: some mobile
+   browsers resize the viewport as the address bar shows/hides, which can
+   make a position:fixed, 100svh hero misbehave (jump, leave gaps, or
+   collapse). Below 768px the hero just scrolls away normally like any
+   other section — simpler and safer. Desktop/laptop (min-width:768px)
+   keeps the fixed pinned-video behaviour untouched. */
+@media (max-width: 767.98px) {
+  .hero { min-height: 100vh; min-height: 100dvh; }
+  .hero-media { position: absolute; }
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
