@@ -213,7 +213,25 @@
   var buyBtn = document.getElementById('buyBtn');
   if (buyBtn) {
     buyBtn.addEventListener('click', function () {
-      showToast('Botón de ejemplo — el pago se conecta en la versión final.');
+      var originalLabel = buyBtn.textContent;
+      buyBtn.disabled = true;
+      buyBtn.textContent = 'Redirigiendo...';
+
+      fetch('/api/crear-pago', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: buyBtn.getAttribute('data-product-id') || 'tricota-aero' })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (result) {
+          if (!result.ok || !result.data.url) throw new Error((result.data && result.data.error) || 'Error desconocido');
+          window.location.href = result.data.url;
+        })
+        .catch(function (err) {
+          showToast(err.message || 'No se pudo iniciar el pago.');
+          buyBtn.disabled = false;
+          buyBtn.textContent = originalLabel;
+        });
     });
   }
 
