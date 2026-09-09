@@ -18,6 +18,7 @@ assets/videos/hero-video.mp4  Video del hero, comprimido para web (13MB → 3.2M
 assets/images/hero-poster.jpg Poster del video / imagen fija que se muestra en celular
 vercel.json                   Config de Vercel (fuerza outputDirectory a la raíz, cache de assets)
 api/crear-pago.js             Función serverless: crea el checkout de Mercado Pago (ver sección abajo)
+api/enviar-consulta.js        Función serverless: manda la consulta del botón flotante al correo del dueño (ver sección abajo)
 shopify-theme/                Mismo diseño, pero como tema real de Shopify (Liquid) — ver shopify-theme/README.md
 ```
 
@@ -77,9 +78,18 @@ Cuando estén listos para cobrar plata de verdad, se reemplaza el Access Token d
 
 ## Botón flotante de consultas (correo)
 
-Aparece en las 3 páginas, abajo a la derecha. Al escribir y apretar "Enviar" abre el programa de correo del visitante con un mensaje prellenado (nombre, correo del visitante y su pregunta) dirigido al negocio.
+Aparece en las 3 páginas, abajo a la derecha. El cliente escribe su nombre, correo y pregunta; al apretar "Enviar" el mensaje llega **directo al Gmail del dueño** mediante `api/enviar-consulta.js` (función serverless de Vercel) — no depende de que el visitante tenga un programa de correo configurado. Cuando el dueño le da "Responder" en Gmail, la respuesta va directo al correo que escribió el cliente (queda configurado así automáticamente).
 
-Todavía no tiene correo de destino configurado a propósito. Para activarlo: en `js/main.js`, buscar la línea `var CONTACT_EMAIL = '';` (cerca del comentario "Contact float") y poner el correo real entre las comillas, ej. `var CONTACT_EMAIL = 'hola@vortexcrew.cl';`. Mientras esté vacío, el botón avisa que falta configurarlo en vez de fallar en silencio.
+Para activarlo, se usa [Resend](https://resend.com) (tiene plan gratuito):
+
+1. Crear una cuenta gratis en [resend.com](https://resend.com) con el Gmail del dueño del negocio.
+2. En el panel de Resend → **API Keys** → crear una nueva, copiarla.
+3. En Vercel: **Project → Settings → Environment Variables**, agregar:
+   - `RESEND_API_KEY` → la key que copiaste.
+   - `CONTACT_EMAIL` → el Gmail donde quieren que lleguen las consultas.
+4. Redesplegar.
+
+**Importante sobre el modo gratis de Resend:** sin verificar un dominio propio, Resend solo deja enviar correos **al mismo correo con el que se creó la cuenta**. Para este caso funciona perfecto, porque justamente queremos que llegue al Gmail del dueño (la misma cuenta). Si más adelante quieren que el remitente diga algo como `contacto@vortexcrew.cl` en vez de la dirección genérica de Resend, hay que verificar un dominio propio en su panel (requiere acceso a la configuración DNS del dominio).
 
 ## Próximos pasos (fuera del alcance de esta demo)
 

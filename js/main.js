@@ -131,11 +131,8 @@
   });
 
   /* ---------- Contact float (mensaje flotante a correo) ----------
-     TEMPORAL — SOLO PARA PRUEBA: quitar este correo antes de la versión
-     final y volver a dejar CONTACT_EMAIL = '' hasta tener el correo
-     real del negocio (ej. 'hola@vortexcrew.cl'). */
-  var CONTACT_EMAIL = 'clemerio21@gmail.com';
-
+     Envía la consulta mediante api/enviar-consulta.js — el correo de
+     destino se configura en Vercel (variable CONTACT_EMAIL), no acá. */
   var contactFloatBtn = document.getElementById('contactFloatBtn');
   var contactPanel = document.getElementById('contactPanel');
   var contactPanelClose = document.getElementById('contactPanelClose');
@@ -167,19 +164,32 @@
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!CONTACT_EMAIL) {
-        showToast('Falta configurar el correo de contacto (CONTACT_EMAIL en js/main.js).');
-        return;
-      }
-      var nombre = contactForm.nombre.value.trim();
-      var correo = contactForm.correo.value.trim();
-      var mensaje = contactForm.mensaje.value.trim();
-      var subject = 'Consulta desde la web — ' + nombre;
-      var body = mensaje + '\n\nCorreo de contacto: ' + correo;
-      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      showToast('Abriendo tu programa de correo...');
-      contactForm.reset();
-      toggleContactPanel(false);
+      var submitBtn = contactForm.querySelector('[type="submit"]');
+      var originalLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
+
+      fetch('/api/enviar-consulta', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: contactForm.nombre.value.trim(),
+          correo: contactForm.correo.value.trim(),
+          mensaje: contactForm.mensaje.value.trim()
+        })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (result) {
+          if (!result.ok) throw new Error((result.data && result.data.error) || 'No se pudo enviar el mensaje.');
+          showToast('¡Mensaje enviado! Te responderemos pronto.');
+          contactForm.reset();
+          toggleContactPanel(false);
+        })
+        .catch(function (err) {
+          showToast(err.message || 'No se pudo enviar el mensaje.');
+        })
+        .finally(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+        });
     });
   }
 
