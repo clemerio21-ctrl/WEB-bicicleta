@@ -7,14 +7,19 @@ Sitio estático (HTML + CSS + JS, sin frameworks ni build). No requiere Node.js 
 ## Estructura
 
 ```
-index.html            Página de Inicio (hero en video, destacados, categorías, nosotros, footer)
-producto.html          Página de producto individual de ejemplo
-css/styles.css         Estilos (design system, layout, responsive)
-js/main.js              Interactividad (nav, tallas/colores, carrito demo, acordeón, etc.)
-public/videos/hero-video.mp4   Video del hero, comprimido para web (13MB → 3.2MB, 1280x720, sin audio)
-public/images/hero-poster.jpg  Poster del video / imagen fija que se muestra en celular
-vercel.json             Config mínima de cache para Vercel
+index.html                    Página de Inicio (hero en video, destacados, categorías, nosotros, footer)
+producto.html                 Página de producto individual de ejemplo
+categoria.html                Plantilla de listado por categoría (usa ?cat=tricotas|calzas|mtb|accesorios|todos)
+css/styles.css                Estilos (design system, layout, responsive)
+js/main.js                    Interactividad (nav, buscador, tallas/colores, carrito demo, acordeón, etc.)
+js/products.js                Catálogo demo compartido (usado por el buscador y categoria.html)
+js/categoria.js               Render, orden y filtros de categoria.html
+assets/videos/hero-video.mp4  Video del hero, comprimido para web (13MB → 3.2MB, 1280x720, sin audio)
+assets/images/hero-poster.jpg Poster del video / imagen fija que se muestra en celular
+vercel.json                   Config de Vercel (fuerza outputDirectory a la raíz, cache de assets)
 ```
+
+> **Nota para quien toque este proyecto:** la carpeta de imágenes/video se llama `assets/`, no `public/`. Vercel trata una carpeta llamada literalmente `public` como el directorio de salida cuando no detecta ningún framework — como nuestros `.html` viven en la raíz del proyecto y no dentro de esa carpeta, eso hacía que el sitio entero devolviera 404. Si algún día se agrega una carpeta de assets nueva, evitar llamarla `public`.
 
 ## Alcance de esta demo
 
