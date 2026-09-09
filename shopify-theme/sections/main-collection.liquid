@@ -1,0 +1,105 @@
+<div class="container">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="{{ routes.root_url }}">Inicio</a>
+    <span class="sep">/</span>
+    <span class="current">{{ collection.title }}</span>
+  </nav>
+</div>
+
+<section class="category-hero">
+  <div class="container">
+    <p class="eyebrow">Catálogo</p>
+    <h1 class="category-title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="category-desc">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="container">
+
+    {% paginate collection.products by 24 %}
+
+    <div class="category-toolbar">
+      <p class="category-count"><strong>{{ collection.products_count }}</strong> producto{% unless collection.products_count == 1 %}s{% endunless %}</p>
+      <form class="sort-control" method="get" action="{{ collection.url }}">
+        <label for="sortSelect">Ordenar por</label>
+        <select id="sortSelect" name="sort_by" onchange="this.form.submit()">
+          {% for option in collection.sort_options %}
+            <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+
+    {% if collection.filters.size > 0 %}
+      {% assign has_active_filter = false %}
+      {% for filter in collection.filters %}
+        {% for value in filter.values %}
+          {% if value.active %}{% assign has_active_filter = true %}{% endif %}
+        {% endfor %}
+      {% endfor %}
+      <div class="filter-bar">
+        {% for filter in collection.filters %}
+          {% if filter.type == 'list' and filter.values.size > 0 %}
+            <div class="filter-group">
+              <span class="filter-group-label">{{ filter.label }}</span>
+              <div class="filter-list">
+                {% for value in filter.values %}
+                  {% if value.count > 0 or value.active %}
+                    {% if filter.label == 'Color' or filter.label == 'Colour' %}
+                      {% capture swatch_hex %}{% render 'color-swatch-hex', name: value.label %}{% endcapture %}
+                      <a href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}" class="filter-swatch{% if value.active %} active{% endif %}" title="{{ value.label }}" aria-label="{{ value.label }}"><span style="background:{{ swatch_hex | strip }};"></span></a>
+                    {% else %}
+                      <a href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}" class="filter-pill{% if value.active %} active{% endif %}">{{ value.label }}{% if value.count %} ({{ value.count }}){% endif %}</a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% if has_active_filter %}
+          <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="filter-clear">Limpiar filtros</a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if collection.products.size > 0 %}
+      <div class="product-grid">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <nav class="pagination" aria-label="Paginación">
+          {% if paginate.previous %}<a href="{{ paginate.previous.url }}">←</a>{% endif %}
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {% else %}
+              <span class="{% if part.title == paginate.current_page %}current{% endif %}">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+          {% if paginate.next %}<a href="{{ paginate.next.url }}">→</a>{% endif %}
+        </nav>
+      {% endif %}
+    {% else %}
+      <div class="category-empty">
+        <h3>No se encontraron productos</h3>
+        <p>Prueba quitando algún filtro de talla o color.</p>
+      </div>
+    {% endif %}
+
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección"
+}
+{% endschema %}

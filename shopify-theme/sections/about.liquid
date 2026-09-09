@@ -1,0 +1,61 @@
+<section class="section-about" id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-media" data-reveal>
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy" />
+        {% endif %}
+        {% if section.blocks.size > 0 %}
+          <div class="about-stats">
+            {% for block in section.blocks %}
+              <div {{ block.shopify_attributes }}><strong>{{ block.settings.number }}</strong><span>{{ block.settings.label }}</span></div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="about-copy" data-reveal>
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h2 class="section-title" style="margin-bottom:22px;">{{ section.settings.heading }}</h2>{% endif %}
+        {% if section.settings.text != blank %}{{ section.settings.text }}{% endif %}
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn-dark">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sobre nosotros",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Sobre nosotros" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Somos Vortex Crew" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Nacimos de una obsesión simple: hacer indumentaria de ciclismo que se sienta tan bien como se ve.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón — texto", "default": "Conócenos" },
+    { "type": "url", "id": "button_link", "label": "Botón — link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Estadística",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Número", "default": "2024" },
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Fundada" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Sobre nosotros",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "2024", "label": "Fundada" } },
+        { "type": "stat", "settings": { "number": "+500", "label": "Ciclistas" } },
+        { "type": "stat", "settings": { "number": "100%", "label": "Diseño técnico" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

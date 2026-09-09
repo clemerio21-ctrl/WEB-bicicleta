@@ -1,0 +1,49 @@
+<section class="hero">
+  <div class="hero-media">
+    {% if section.settings.video != blank %}
+      {{ section.settings.video | video_tag: loop: true, muted: true, controls: false, playsinline: true, id: 'heroVideo', image_size: '1280x' }}
+    {% endif %}
+    {% if section.settings.poster != blank %}
+      <img id="heroPoster" src="{{ section.settings.poster | image_url: width: 1600 }}" alt="{{ section.settings.poster.alt | default: section.settings.heading | strip_html | escape }}" {% if section.settings.video == blank %}style="display:block;"{% endif %} />
+    {% elsif section.settings.video == blank %}
+      <div style="position:absolute;inset:0;background:var(--c-black);"></div>
+    {% endif %}
+  </div>
+
+  <div class="hero-content">
+    {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+    {% if section.settings.heading != blank %}<h1 class="hero-title">{{ section.settings.heading | replace: '<p>', '' | replace: '</p>', '' }}</h1>{% endif %}
+    {% if section.settings.text != blank %}<div class="hero-text">{{ section.settings.text }}</div>{% endif %}
+    <div class="hero-cta">
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn-primary">{{ section.settings.button_label }}</a>
+      {% endif %}
+      {% if section.settings.button_label_2 != blank %}
+        <a href="{{ section.settings.button_link_2 | default: '#' }}" class="btn btn-ghost">{{ section.settings.button_label_2 }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <span class="chevron"></span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero de portada",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Video de fondo" },
+    { "type": "image_picker", "id": "poster", "label": "Imagen de respaldo (se usa si no hay video, o como poster)" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Vortex Crew · Nueva Colección" },
+    { "type": "richtext", "id": "heading", "label": "Titular (selecciona una palabra y usa cursiva para resaltarla en color de marca)", "default": "<p>RUEDA SIN <em>LÍMITES</em></p>" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Indumentaria técnica de ciclismo diseñada para quienes no se detienen.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón principal — texto", "default": "Ver catálogo" },
+    { "type": "url", "id": "button_link", "label": "Botón principal — link" },
+    { "type": "text", "id": "button_label_2", "label": "Botón secundario — texto", "default": "Nuestra historia" },
+    { "type": "url", "id": "button_link_2", "label": "Botón secundario — link" }
+  ],
+  "presets": [{ "name": "Hero de portada" }]
+}
+{% endschema %}

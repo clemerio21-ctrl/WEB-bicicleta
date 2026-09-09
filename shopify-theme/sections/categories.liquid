@@ -1,0 +1,63 @@
+<section class="section-categories" id="categorias">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h2 class="section-title">{{ section.settings.heading }}</h2>{% endif %}
+      </div>
+      {% if section.settings.subheading != blank %}<p class="section-sub on-dark">{{ section.settings.subheading }}</p>{% endif %}
+    </div>
+
+    <div class="cat-grid">
+      {% for block in section.blocks %}
+        {% assign cat_collection = collections[block.settings.collection] %}
+        <a href="{{ cat_collection.url | default: '#' }}" class="cat-card" data-reveal {{ block.shopify_attributes }}>
+          {% assign cat_image = block.settings.image | default: cat_collection.image | default: cat_collection.products.first.featured_image %}
+          {% if cat_image %}
+            <img src="{{ cat_image | image_url: width: 900 }}" alt="{{ block.settings.title | default: cat_collection.title | escape }}" loading="lazy" />
+          {% endif %}
+          <div class="cat-tag">
+            {% if cat_collection %}<span class="cat-count">{{ cat_collection.products_count }} productos</span>{% endif %}
+            <h3>{{ block.settings.title | default: cat_collection.title }}</h3>
+            <span class="cat-link">Ver categoría
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categorías",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Explora" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Rueda a tu manera" },
+    { "type": "textarea", "id": "subheading", "label": "Bajada", "default": "Elige tu categoría: ruta, aero o montaña." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Colección" },
+        { "type": "text", "id": "title", "label": "Título a mostrar (opcional, por defecto usa el de la colección)" },
+        { "type": "image_picker", "id": "image", "label": "Foto (opcional, por defecto usa la imagen de la colección)" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Categorías",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Tricotas y Jerseys" } },
+        { "type": "category", "settings": { "title": "Calzas y Shorts" } },
+        { "type": "category", "settings": { "title": "MTB & Gravel" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

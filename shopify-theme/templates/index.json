@@ -1,0 +1,65 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Vortex Crew · Nueva Colección",
+        "heading": "<p>RUEDA SIN <em>LÍMITES</em></p>",
+        "text": "<p>Indumentaria técnica de ciclismo diseñada para quienes no se detienen. Rendimiento, ajuste y actitud en cada salida.</p>",
+        "button_label": "Ver catálogo",
+        "button_link": "#destacados",
+        "button_label_2": "Nuestra historia",
+        "button_link_2": "#nosotros"
+      }
+    },
+    "destacados": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Colección",
+        "heading": "Lo más pedido",
+        "subheading": "Piezas técnicas pensadas para ruta, gravel y entrenamiento. Elige tu talla y color favorito.",
+        "products_to_show": 6,
+        "button_label": "Ver todo el catálogo"
+      }
+    },
+    "categorias": {
+      "type": "categories",
+      "settings": {
+        "eyebrow": "Explora",
+        "heading": "Rueda a tu manera",
+        "subheading": "Elige tu categoría: ruta, aero o montaña. Cada línea Vortex está pensada para un tipo de salida."
+      },
+      "blocks": {
+        "cat-1": { "type": "category", "settings": { "title": "Tricotas y Jerseys" } },
+        "cat-2": { "type": "category", "settings": { "title": "Calzas y Shorts" } },
+        "cat-3": { "type": "category", "settings": { "title": "MTB & Gravel" } }
+      },
+      "block_order": ["cat-1", "cat-2", "cat-3"]
+    },
+    "nosotros": {
+      "type": "about",
+      "settings": {
+        "eyebrow": "Sobre nosotros",
+        "heading": "Somos Vortex Crew",
+        "text": "<p>Nacimos de una obsesión simple: hacer indumentaria de ciclismo que se sienta tan bien como se ve. Cada pieza se diseña para acompañar el pedaleo, sin rozar, sin sobrar.</p>",
+        "button_label": "Conócenos",
+        "button_link": "#footer"
+      },
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "number": "2024", "label": "Fundada" } },
+        "stat-2": { "type": "stat", "settings": { "number": "+500", "label": "Ciclistas" } },
+        "stat-3": { "type": "stat", "settings": { "number": "100%", "label": "Diseño técnico" } }
+      },
+      "block_order": ["stat-1", "stat-2", "stat-3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Únete al Crew",
+        "text": "Sé el primero en enterarte de nuevos lanzamientos, drops limitados y descuentos exclusivos.",
+        "button_label": "Suscribirme"
+      }
+    }
+  },
+  "order": ["hero", "destacados", "categorias", "nosotros", "newsletter"]
+}

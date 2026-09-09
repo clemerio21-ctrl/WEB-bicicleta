@@ -1,0 +1,28 @@
+<section class="section-cta">
+  <div class="container">
+    {% if section.settings.heading != blank %}<h2 data-reveal>{{ section.settings.heading }}</h2>{% endif %}
+    {% if section.settings.text != blank %}<p data-reveal>{{ section.settings.text }}</p>{% endif %}
+
+    {% form 'customer', id: 'newsletterForm', class: 'cta-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {% if form.posted_successfully? %}
+        <p class="cta-note" style="width:100%;">¡Gracias por suscribirte!</p>
+      {% else %}
+        <input type="email" name="contact[email]" id="newsletterEmail" placeholder="tu@email.com" required aria-label="Correo electrónico" />
+        <button type="submit">{{ section.settings.button_label | default: 'Suscribirme' }}</button>
+      {% endif %}
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Únete al Crew" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Sé el primero en enterarte de nuevos lanzamientos, drops limitados y descuentos exclusivos." },
+    { "type": "text", "id": "button_label", "label": "Botón — texto", "default": "Suscribirme" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

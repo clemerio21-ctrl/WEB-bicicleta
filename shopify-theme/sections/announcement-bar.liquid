@@ -1,0 +1,40 @@
+{% if section.blocks.size > 0 %}
+<div class="announce">
+  <div class="announce-track" aria-hidden="true">
+    {% for block in section.blocks %}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {% endfor %}
+    {% comment %} repeated once more so the marquee loop is seamless {% endcomment %}
+    {% for block in section.blocks %}
+      <span aria-hidden="true">{{ block.settings.text }}</span>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "max_blocks": 6,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Mensaje",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Envío gratis en compras sobre $50.000" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Envío gratis en compras sobre $50.000" } },
+        { "type": "message", "settings": { "text": "Retiro gratis en tienda · Santiago" } },
+        { "type": "message", "settings": { "text": "Nueva colección Vortex disponible" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

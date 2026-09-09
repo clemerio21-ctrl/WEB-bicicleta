@@ -1,0 +1,82 @@
+<footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="{{ routes.root_url }}" class="logo">
+          {% if section.settings.logo_part_2 != blank %}
+            {{ section.settings.logo_part_1 }}<span class="dot">·</span>{{ section.settings.logo_part_2 }}
+          {% else %}
+            {{ section.settings.logo_part_1 | default: shop.name }}
+          {% endif %}
+        </a>
+        <p>{{ section.settings.blurb }}</p>
+        <div class="footer-social">
+          {% if section.settings.instagram_url != blank %}
+            <a href="{{ section.settings.instagram_url }}" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          {% endif %}
+          {% if section.settings.facebook_url != blank %}
+            <a href="{{ section.settings.facebook_url }}" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          {% endif %}
+          {% if section.settings.strava_url != blank %}
+            <a href="{{ section.settings.strava_url }}" aria-label="Strava" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></a>
+          {% endif %}
+        </div>
+      </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'menu' %}
+          <div class="footer-col" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.title }}</h4>
+            <ul>
+              {% for link in linklists[block.settings.menu].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          {% if section.settings.contact_email != blank %}<li>{{ section.settings.contact_email }}</li>{% endif %}
+          {% if section.settings.contact_phone != blank %}<li>{{ section.settings.contact_phone }}</li>{% endif %}
+          {% if section.settings.contact_address != blank %}<li>{{ section.settings.contact_address }}</li>{% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.bottom_note }}</span>
+      <span><a href="{{ pages.terminos.url | default: '#' }}">Términos</a> · <a href="{{ pages.privacidad.url | default: '#' }}">Privacidad</a></span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "logo_part_1", "label": "Logo — primera palabra", "default": "VORTEX" },
+    { "type": "text", "id": "logo_part_2", "label": "Logo — segunda palabra (opcional)", "default": "CREW" },
+    { "type": "textarea", "id": "blurb", "label": "Descripción breve", "default": "Indumentaria técnica de ciclismo. Diseñada para rodar sin límites, en ruta o en montaña." },
+    { "type": "text", "id": "instagram_url", "label": "URL de Instagram" },
+    { "type": "text", "id": "facebook_url", "label": "URL de Facebook" },
+    { "type": "text", "id": "strava_url", "label": "URL de Strava" },
+    { "type": "text", "id": "contact_email", "label": "Email de contacto", "default": "hola@vortexcrew.cl" },
+    { "type": "text", "id": "contact_phone", "label": "Teléfono de contacto", "default": "+56 9 1234 5678" },
+    { "type": "text", "id": "contact_address", "label": "Dirección", "default": "Santiago, Chile" },
+    { "type": "text", "id": "bottom_note", "label": "Nota al pie", "default": "Todos los derechos reservados." }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Columna de menú",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título de la columna", "default": "Tienda" },
+        { "type": "link_list", "id": "menu", "label": "Menú a mostrar", "default": "footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

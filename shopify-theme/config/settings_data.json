@@ -1,0 +1,48 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_accent": "#ff4b1f",
+      "color_ink": "#121214",
+      "color_background": "#f7f6f3",
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "blocks": {
+            "msg-1": { "type": "message", "settings": { "text": "Envío gratis en compras sobre $50.000" } },
+            "msg-2": { "type": "message", "settings": { "text": "Retiro gratis en tienda · Santiago" } },
+            "msg-3": { "type": "message", "settings": { "text": "Nueva colección Vortex disponible" } }
+          },
+          "block_order": ["msg-1", "msg-2", "msg-3"]
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "menu": "main-menu",
+            "logo_part_1": "VORTEX",
+            "logo_part_2": "CREW",
+            "contact_email": "hola@vortexcrew.cl",
+            "contact_phone": "+56 9 1234 5678"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "settings": {
+            "logo_part_1": "VORTEX",
+            "logo_part_2": "CREW",
+            "blurb": "Indumentaria técnica de ciclismo. Diseñada para rodar sin límites, en ruta o en montaña.",
+            "contact_email": "hola@vortexcrew.cl",
+            "contact_phone": "+56 9 1234 5678",
+            "contact_address": "Santiago, Chile",
+            "bottom_note": "Demo de visualización — contenido de ejemplo."
+          },
+          "blocks": {
+            "col-1": { "type": "menu", "settings": { "title": "Tienda", "menu": "main-menu" } },
+            "col-2": { "type": "menu", "settings": { "title": "Ayuda", "menu": "footer" } }
+          },
+          "block_order": ["col-1", "col-2"]
+        }
+      }
+    }
+  }
+}

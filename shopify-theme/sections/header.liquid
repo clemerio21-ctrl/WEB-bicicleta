@@ -1,0 +1,55 @@
+{% assign main_menu = linklists[section.settings.menu] %}
+<header class="site-header{% if request.page_type == 'index' %}{% else %} is-solid{% endif %}" id="siteHeader">
+  <div class="container">
+    <a href="{{ routes.root_url }}" class="logo">
+      {% if section.settings.logo_part_2 != blank %}
+        {{ section.settings.logo_part_1 }}<span class="dot">·</span>{{ section.settings.logo_part_2 }}
+      {% else %}
+        {{ section.settings.logo_part_1 | default: shop.name }}
+      {% endif %}
+    </a>
+
+    <nav class="nav-desktop">
+      {% for link in main_menu.links %}
+        <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn hide-mobile js-search-toggle" aria-label="Buscar" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count js-cart-count">{{ cart.item_count }}</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-mobile" id="navMobile">
+  {% for link in main_menu.links %}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  {% endfor %}
+  <div class="nav-mobile-foot">
+    {{ shop.name }}<br />
+    {% if section.settings.contact_email != blank %}{{ section.settings.contact_email }}{% endif %}
+    {% if section.settings.contact_phone != blank %} · {{ section.settings.contact_phone }}{% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menú de navegación", "default": "main-menu" },
+    { "type": "text", "id": "logo_part_1", "label": "Logo — primera palabra", "default": "VORTEX" },
+    { "type": "text", "id": "logo_part_2", "label": "Logo — segunda palabra (opcional)", "default": "CREW" },
+    { "type": "text", "id": "contact_email", "label": "Email de contacto (menú móvil)", "default": "hola@vortexcrew.cl" },
+    { "type": "text", "id": "contact_phone", "label": "Teléfono de contacto (menú móvil)", "default": "+56 9 1234 5678" }
+  ]
+}
+{% endschema %}

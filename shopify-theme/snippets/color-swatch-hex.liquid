@@ -1,0 +1,21 @@
+{% comment %}
+  Best-effort color-name → hex mapping for swatch dots (Spanish + English).
+  Usage: {% render 'color-swatch-hex', name: value %} outputs a hex string.
+  Unrecognised names fall back to a neutral gray so the dot still renders.
+{% endcomment %}
+{%- assign n = name | downcase | strip -%}
+{%- case n -%}
+  {%- when 'negro' or 'black' -%}#0a0a0c
+  {%- when 'blanco' or 'white' -%}#f7f6f3
+  {%- when 'gris' or 'gray' or 'grey' or 'gris grafito' or 'graphite' -%}#3b3b44
+  {%- when 'naranja' or 'orange' or 'vortex orange' -%}#ff4b1f
+  {%- when 'azul' or 'blue' or 'navy' or 'azul marino' -%}#1f3a5f
+  {%- when 'rojo' or 'red' -%}#c81e1e
+  {%- when 'verde' or 'green' -%}#2f6b3a
+  {%- when 'amarillo' or 'yellow' -%}#e8c11c
+  {%- when 'rosa' or 'pink' or 'fucsia' -%}#e0568c
+  {%- when 'café' or 'marron' or 'marrón' or 'brown' -%}#5a3d2b
+  {%- when 'morado' or 'purpura' or 'púrpura' or 'purple' or 'violeta' -%}#5a3d8a
+  {%- when 'beige' or 'arena' or 'tan' -%}#d8c7a8
+  {%- else -%}#9a9aa4
+{%- endcase -%}

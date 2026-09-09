@@ -1,0 +1,22 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Vortex Crew",
+    "theme_author": "Vortex Crew",
+    "theme_version": "1.0.0"
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      { "type": "color", "id": "color_accent", "label": "Color de marca (acento)", "default": "#ff4b1f" },
+      { "type": "color", "id": "color_ink", "label": "Negro / texto principal", "default": "#121214" },
+      { "type": "color", "id": "color_background", "label": "Fondo claro", "default": "#f7f6f3" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Ícono del sitio (cuadrado, mínimo 32x32px)" }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+<section class="section-products" id="{{ section.id }}">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h2 class="section-title">{{ section.settings.heading }}</h2>{% endif %}
+      </div>
+      {% if section.settings.subheading != blank %}<p class="section-sub">{{ section.settings.subheading }}</p>{% endif %}
+    </div>
+
+    <div class="product-grid">
+      {% assign featured_collection = collections[section.settings.collection] %}
+      {% if featured_collection == blank and product != blank %}
+        {% comment %} No collection chosen (e.g. the default "related products" section on a product page) — fall back to the current product's own collection. {% endcomment %}
+        {% assign featured_collection = product.collections.first %}
+      {% endif %}
+      {% if featured_collection != blank %}
+        {% assign shown = 0 %}
+        {% for card_product in featured_collection.products %}
+          {% if card_product.id != product.id %}
+            {% render 'product-card', product: card_product %}
+            {% assign shown = shown | plus: 1 %}
+          {% endif %}
+          {% if shown >= section.settings.products_to_show %}{% break %}{% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% if section.settings.button_label != blank and featured_collection != blank %}
+      <div class="products-foot" data-reveal>
+        <a href="{{ section.settings.button_link | default: featured_collection.url }}" class="btn btn-dark">{{ section.settings.button_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección destacada",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Colección" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Lo más pedido" },
+    { "type": "textarea", "id": "subheading", "label": "Bajada", "default": "Piezas técnicas pensadas para ruta, gravel y entrenamiento." },
+    { "type": "collection", "id": "collection", "label": "Colección a mostrar" },
+    { "type": "range", "id": "products_to_show", "min": 3, "max": 12, "step": 1, "label": "Productos a mostrar", "default": 6 },
+    { "type": "text", "id": "button_label", "label": "Botón — texto", "default": "Ver todo el catálogo" },
+    { "type": "url", "id": "button_link", "label": "Botón — link (opcional, por defecto va a la colección)" }
+  ],
+  "presets": [{ "name": "Colección destacada" }]
+}
+{% endschema %}

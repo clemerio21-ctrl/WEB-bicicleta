@@ -1,0 +1,57 @@
+<div class="container">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="{{ routes.root_url }}">Inicio</a>
+    <span class="sep">/</span>
+    <span class="current">Carrito</span>
+  </nav>
+</div>
+
+<section class="category-hero">
+  <div class="container">
+    <p class="eyebrow">Tu compra</p>
+    <h1 class="category-title">Carrito</h1>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="container">
+    {% if cart.item_count > 0 %}
+      {% form 'cart', cart %}
+        <div class="cart-table">
+          {% for item in cart.items %}
+            <div class="cart-row">
+              <img src="{{ item.image | image_url: width: 150 }}" alt="{{ item.title | escape }}" />
+              <div>
+                <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                {% unless item.variant.title == 'Default Title' %}
+                  <div class="cart-item-variant">{{ item.variant.title }}</div>
+                {% endunless %}
+                <a href="{{ item.url_to_remove }}" class="cart-remove">Eliminar</a>
+              </div>
+              <input type="number" name="updates[{{ forloop.index0 }}]" value="{{ item.quantity }}" min="0" />
+              <span class="cart-item-price">{{ item.final_line_price | money }}</span>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="cart-summary">
+          <span>Subtotal: <strong class="total">{{ cart.total_price | money }}</strong></span>
+        </div>
+        <div class="pdp-actions" style="margin-top:20px; justify-content:flex-end;">
+          <button type="submit" name="update" class="btn btn-dark">Actualizar carrito</button>
+          <button type="submit" name="checkout" class="btn btn-primary">Finalizar compra</button>
+        </div>
+      {% endform %}
+    {% else %}
+      <div class="cart-empty">
+        <h3>Tu carrito está vacío</h3>
+        <p>Todavía no agregaste productos.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-dark" style="margin-top:20px;">Ver catálogo</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Carrito" }
+{% endschema %}

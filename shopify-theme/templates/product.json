@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "related": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Combina con",
+        "heading": "También te puede interesar",
+        "subheading": "",
+        "products_to_show": 3,
+        "button_label": ""
+      }
+    }
+  },
+  "order": ["main", "related"]
+}

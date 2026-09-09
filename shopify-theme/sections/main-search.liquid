@@ -1,0 +1,45 @@
+<div class="container">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="{{ routes.root_url }}">Inicio</a>
+    <span class="sep">/</span>
+    <span class="current">Búsqueda</span>
+  </nav>
+</div>
+
+<section class="category-hero">
+  <div class="container">
+    <p class="eyebrow">Resultados</p>
+    <h1 class="category-title">{% if search.performed %}"{{ search.terms }}"{% else %}Buscar{% endif %}</h1>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="container">
+    <form class="search-form-page" action="{{ routes.search_url }}" method="get" role="search">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar tricotas, calzas, guantes..." />
+      <button type="submit" class="btn btn-dark">Buscar</button>
+    </form>
+
+    {% if search.performed %}
+      {% if search.results.size > 0 %}
+        <p class="category-count" style="margin-bottom:24px;"><strong>{{ search.results_count }}</strong> resultado{% unless search.results_count == 1 %}s{% endunless %}</p>
+        <div class="product-grid">
+          {% for item in search.results %}
+            {% if item.object_type == 'product' %}
+              {% render 'product-card', product: item %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="category-empty">
+          <h3>Sin resultados para "{{ search.terms }}"</h3>
+          <p>Prueba con otra palabra, por ejemplo "tricota" o "calzas".</p>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Resultados de búsqueda" }
+{% endschema %}
