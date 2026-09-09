@@ -131,10 +131,10 @@
   });
 
   /* ---------- Contact float (mensaje flotante a correo) ----------
-     TODO: completar con el correo real del negocio cuando lo definan
-     (ej. 'hola@vortexcrew.cl'). Mientras esté vacío, el botón avisa
-     que falta configurarlo en vez de fallar en silencio. */
-  var CONTACT_EMAIL = '';
+     TEMPORAL — SOLO PARA PRUEBA: quitar este correo antes de la versión
+     final y volver a dejar CONTACT_EMAIL = '' hasta tener el correo
+     real del negocio (ej. 'hola@vortexcrew.cl'). */
+  var CONTACT_EMAIL = 'clemerio21@gmail.com';
 
   var contactFloatBtn = document.getElementById('contactFloatBtn');
   var contactPanel = document.getElementById('contactPanel');
