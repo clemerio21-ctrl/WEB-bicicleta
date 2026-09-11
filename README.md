@@ -1,40 +1,58 @@
-# Vortex Crew — Demo
+# roots co. — Demo
 
-Demo rápida de tienda de indumentaria de ciclismo (marca **Vortex Crew**), construida para validar estilo con el cliente antes de armar la tienda completa.
+Demo de tienda de indumentaria de trail/MTB (marca **roots co.**), construida para validar estilo con el cliente antes de armar la tienda completa.
 
 Sitio estático (HTML + CSS + JS, sin frameworks ni build). No requiere Node.js para editar ni para desplegar.
 
 ## Estructura
 
 ```
-index.html                    Página de Inicio (hero en video, destacados, categorías, nosotros, footer)
-producto.html                 Página de producto individual de ejemplo
-categoria.html                Plantilla de listado por categoría (usa ?cat=tricotas|calzas|mtb|accesorios|todos)
+index.html                    Página de Inicio (hero, destacados, categorías, nosotros, footer)
+producto.html                 Página de producto individual (Polera Araucaria)
+categoria.html                Plantilla de listado por categoría (usa ?cat=poleras|pantalones|shorts|guantes|cinturones|calcetines|botellas|accesorios|todos)
 css/styles.css                Estilos (design system, layout, responsive)
 js/main.js                    Interactividad (nav, buscador, tallas/colores, carrito demo, acordeón, etc.)
-js/products.js                Catálogo demo compartido (usado por el buscador y categoria.html)
+js/products.js                Catálogo compartido (usado por el buscador y categoria.html)
 js/categoria.js               Render, orden y filtros de categoria.html
-assets/videos/hero-video.mp4  Video del hero, comprimido para web (13MB → 3.2MB, 1280x720, sin audio)
-assets/images/hero-poster.jpg Poster del video / imagen fija que se muestra en celular
+assets/images/productos/      Fotos reales de producto (provistas por el cliente), organizadas por categoría
+assets/images/banner/         Foto del hero y foto de respaldo para celular
+assets/images/categorias/     Fotos de fondo de las 3 tarjetas de categoría del home
+assets/images/nosotros/       Foto de la sección "Sobre nosotros"
 vercel.json                   Config de Vercel (fuerza outputDirectory a la raíz, cache de assets)
 api/crear-pago.js             Función serverless: crea el checkout de Mercado Pago (ver sección abajo)
 api/enviar-consulta.js        Función serverless: manda la consulta del botón flotante al correo del dueño (ver sección abajo)
-shopify-theme/                Mismo diseño, pero como tema real de Shopify (Liquid) — ver shopify-theme/README.md
+shopify-theme/                Mismo diseño (bajo la marca anterior "Vortex Crew"), como tema real de Shopify — ver nota abajo
 ```
+
+> **Nota sobre `shopify-theme/`:** ese tema se construyó antes de recibir el material real de roots co. y todavía tiene la marca de ejemplo "Vortex Crew" — no se actualizó en esta pasada (el pedido del cliente fue enfocado en el sitio estático). Si más adelante se retoma la versión Shopify, hay que aplicarle el mismo rebranding que se hizo acá.
 
 ## Versión Shopify
 
-Además de esta demo estática, existe una versión del mismo diseño construida como tema de Shopify (carrito y checkout reales, no de ejemplo), lista para subir a una tienda existente sin afectar el tema publicado. Ver [`shopify-theme/README.md`](shopify-theme/README.md) para instrucciones.
+Además de esta demo estática, existe una versión del mismo layout construida como tema de Shopify (carrito y checkout reales, no de ejemplo). Está desactualizada respecto al branding real (ver nota arriba). Ver [`shopify-theme/README.md`](shopify-theme/README.md) para instrucciones de instalación.
 
 > **Nota para quien toque este proyecto:** la carpeta de imágenes/video se llama `assets/`, no `public/`. Vercel trata una carpeta llamada literalmente `public` como el directorio de salida cuando no detecta ningún framework — como nuestros `.html` viven en la raíz del proyecto y no dentro de esa carpeta, eso hacía que el sitio entero devolviera 404. Si algún día se agrega una carpeta de assets nueva, evitar llamarla `public`.
 
 ## Alcance de esta demo
 
-- Página de Inicio y una página de Producto de ejemplo.
+- Página de Inicio y una página de Producto (Polera Araucaria, la más vendida del catálogo real).
 - "Agregar al carrito" es de ejemplo (muestra un aviso tipo toast, no hay carrito real). "Comprar ahora" en `producto.html` sí está conectado a un checkout real de Mercado Pago — ver sección abajo.
-- Fotos y textos de productos son **placeholder** (nombres, precios y tallas de ejemplo). El único contenido real es el video del hero.
-- Las fotos de las secciones "Categorías" y "Sobre nosotros" son fotos de stock (Unsplash) usadas como placeholder de estilo de vida — se reemplazan por fotos reales del cliente más adelante.
-- Los íconos de producto (tricota, calzas, guantes, gorra, etc.) son ilustraciones lineales sobre fondos degradados de marca — un lookbook simple, ya que aún no hay fotografía real de producto.
+- **Fotos de producto: reales**, provistas por el cliente (33 fotos de estudio, 14 modelos). **Precios: provisorios**, uno fijo por categoría (ver tabla abajo) — todavía no se recibió una lista de precios real. **Nombres, colores y tallas: reales**, sacados directo de la planilla de stock del cliente.
+- Las fotos de las secciones "Categorías" y "Sobre nosotros" son fotos reales de acción/detalle del mismo cliente (no son stock de internet).
+- Solo se publicaron las variantes **Hombre** de las poleras. El stock del cliente incluye 4 modelos de Mujer (Araucaria, Campamento Base, Hit The Road, Combi) en colores distintos, pero no llegaron fotos de esas variantes — hay que pedírselas al cliente y agregarlas en `js/products.js` cuando estén.
+
+### Precios provisorios por categoría
+
+| Categoría | Precio placeholder |
+|---|---|
+| Poleras | $27.990 |
+| Pantalón | $39.990 |
+| Short | $24.990 |
+| Guantes | $14.990 |
+| Cinturón | $16.990 |
+| Calcetines | $7.990 |
+| Botellas | $9.990 |
+
+Se cambian editando el campo `price` de cada producto en `js/products.js`.
 
 ## Ver la demo en tu computador
 
@@ -72,7 +90,7 @@ El botón "Comprar ahora" de `producto.html` ya está conectado a Mercado Pago m
 3. Copiar el **Access Token de PRUEBA** (modo sandbox — sirve para probar con tarjetas de prueba antes de cobrar plata real).
 4. En Vercel: **Project → Settings → Environment Variables**, agregar `MP_ACCESS_TOKEN` con ese valor, y volver a desplegar.
 
-Con eso, al apretar "Comprar ahora" se crea una orden real en Mercado Pago y redirige al checkout de prueba. El precio ($39.990) se define en el propio `api/crear-pago.js`, no en el navegador, para que nadie lo pueda alterar desde las herramientas de desarrollador.
+Con eso, al apretar "Comprar ahora" se crea una orden real en Mercado Pago y redirige al checkout de prueba. El precio ($27.990) se define en el propio `api/crear-pago.js`, no en el navegador, para que nadie lo pueda alterar desde las herramientas de desarrollador.
 
 Cuando estén listos para cobrar plata de verdad, se reemplaza el Access Token de prueba por el de **producción** (mismo panel de Mercado Pago) — no hay que tocar código.
 
@@ -89,12 +107,13 @@ Para activarlo, se usa [Resend](https://resend.com) (tiene plan gratuito):
    - `CONTACT_EMAIL` → el Gmail donde quieren que lleguen las consultas.
 4. Redesplegar.
 
-**Importante sobre el modo gratis de Resend:** sin verificar un dominio propio, Resend solo deja enviar correos **al mismo correo con el que se creó la cuenta**. Para este caso funciona perfecto, porque justamente queremos que llegue al Gmail del dueño (la misma cuenta). Si más adelante quieren que el remitente diga algo como `contacto@vortexcrew.cl` en vez de la dirección genérica de Resend, hay que verificar un dominio propio en su panel (requiere acceso a la configuración DNS del dominio).
+**Importante sobre el modo gratis de Resend:** sin verificar un dominio propio, Resend solo deja enviar correos **al mismo correo con el que se creó la cuenta**. Para este caso funciona perfecto, porque justamente queremos que llegue al Gmail del dueño (la misma cuenta). Si más adelante quieren que el remitente diga algo como `contacto@rootsco.cl` en vez de la dirección genérica de Resend, hay que verificar un dominio propio en su panel (requiere acceso a la configuración DNS del dominio).
 
 ## Próximos pasos (fuera del alcance de esta demo)
 
-- Conectar Mercado Pago al resto de los productos del catálogo (hoy solo el de `producto.html` está conectado) y al botón "Agregar al carrito" con un carrito real de varios productos.
-- Cargar catálogo completo de productos con fotografía real.
+- Reemplazar los precios placeholder por la lista de precios real del cliente (ver tabla arriba).
+- Conseguir fotos de las 4 variantes Mujer de poleras que faltan (Araucaria, Campamento Base, Hit The Road, Combi).
+- Conectar Mercado Pago al resto de los productos del catálogo (hoy solo Polera Araucaria está conectada) y al botón "Agregar al carrito" con un carrito real de varios productos.
 - Panel de administración para que el cliente cargue productos.
 - Definir hosting definitivo (Hostinger u otro) junto al cliente, y hacer el deploy final ahí.
-- Reemplazar textos e imágenes placeholder por contenido real de la marca.
+- Actualizar `shopify-theme/` con la marca y catálogo reales, si se retoma esa vía.

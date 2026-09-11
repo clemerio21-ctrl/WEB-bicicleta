@@ -51,7 +51,7 @@
     searchResults.innerHTML = '';
 
     if (!q) {
-      searchResults.innerHTML = '<p class="search-hint">Prueba con "tricota", "calzas", "mtb"...</p>';
+      searchResults.innerHTML = '<p class="search-hint">Prueba con "polera", "pantalón", "guantes"...</p>';
       return;
     }
     var matches = catalog.products.filter(function (p) {
@@ -193,34 +193,6 @@
     });
   }
 
-  /* ---------- Hero video: plays on any screen size, skipped only for reduced-motion ---------- */
-  var heroVideo = document.getElementById('heroVideo');
-  var heroPoster = document.getElementById('heroPoster');
-  if (heroVideo) {
-    var mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function setupHeroMedia() {
-      if (!mqReduced.matches) {
-        var source = heroVideo.querySelector('source');
-        if (source && !source.src) {
-          source.src = source.getAttribute('data-src');
-          heroVideo.load();
-          heroVideo.addEventListener('canplay', function () {
-            heroVideo.play().catch(function () {});
-            heroVideo.style.display = 'block';
-            if (heroPoster) heroPoster.style.display = 'none';
-          }, { once: true });
-        }
-      } else {
-        heroVideo.style.display = 'none';
-        if (heroPoster) heroPoster.style.display = 'block';
-      }
-    }
-    heroVideo.style.display = 'none';
-    setupHeroMedia();
-    mqReduced.addEventListener('change', setupHeroMedia);
-  }
-
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window && revealEls.length) {
@@ -283,7 +255,7 @@
       fetch('/api/crear-pago', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: buyBtn.getAttribute('data-product-id') || 'tricota-aero' })
+        body: JSON.stringify({ productId: buyBtn.getAttribute('data-product-id') || 'polera-araucaria' })
       })
         .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
         .then(function (result) {
@@ -322,33 +294,24 @@
     });
   }
 
-  /* ---------- PDP: gallery thumbs swap tile color ---------- */
+  /* ---------- PDP: gallery thumbs swap the main photo ---------- */
   var galleryMain = document.getElementById('galleryMain');
   document.querySelectorAll('.pdp-thumb').forEach(function (thumb) {
     thumb.addEventListener('click', function () {
       document.querySelectorAll('.pdp-thumb').forEach(function (t) { t.classList.remove('active'); });
       thumb.classList.add('active');
       if (galleryMain) {
-        galleryMain.className = 'pdp-gallery-main ' + thumb.getAttribute('data-tile');
-        var icon = galleryMain.querySelector('svg');
-        if (icon) galleryMain.appendChild(icon);
+        var img = galleryMain.querySelector('img');
+        if (img) img.src = thumb.getAttribute('data-full');
       }
     });
   });
 
-  /* ---------- PDP: color swatches swap gallery + label ---------- */
+  /* ---------- PDP: color swatches update the label ---------- */
   var colorValue = document.getElementById('colorValue');
   document.querySelectorAll('.pdp-color').forEach(function (btn) {
     btn.addEventListener('click', function () {
       if (colorValue) colorValue.textContent = btn.getAttribute('data-color-name');
-      if (galleryMain) {
-        galleryMain.className = 'pdp-gallery-main ' + btn.getAttribute('data-tile');
-        var icon = galleryMain.querySelector('svg');
-        if (icon) galleryMain.appendChild(icon);
-      }
-      document.querySelectorAll('.pdp-thumb').forEach(function (t) {
-        t.classList.toggle('active', t.getAttribute('data-tile') === btn.getAttribute('data-tile'));
-      });
     });
   });
 

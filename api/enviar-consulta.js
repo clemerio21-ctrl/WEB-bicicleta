@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
         Authorization: 'Bearer ' + apiKey
       },
       body: JSON.stringify({
-        from: 'Vortex Crew Web <onboarding@resend.dev>',
+        from: 'roots co. Web <onboarding@resend.dev>',
         to: [destino],
         reply_to: correo,
         subject: 'Consulta desde la web — ' + nombre,

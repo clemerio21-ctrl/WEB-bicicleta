@@ -7,7 +7,7 @@
 // El precio vive acá, no en el navegador, para que nadie pueda manipular
 // el monto a pagar desde las herramientas de desarrollador.
 var CATALOGO = {
-  'tricota-aero': { title: 'Tricota Aero Manga Corta', price: 39990 }
+  'polera-araucaria': { title: 'Polera Araucaria', price: 27990 }
 };
 
 module.exports = async function handler(req, res) {

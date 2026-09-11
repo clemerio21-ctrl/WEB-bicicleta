@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VORTEX CREW — Demo styles
+   ROOTS CO. — estilos del sitio
    ========================================================================== */
 
 /* ---------- Fonts ---------- */
@@ -11,17 +11,17 @@
   --c-black-soft: #131316;
   --c-card: #1a1a1e;
   --c-card-2: #202024;
-  --c-white: #f7f6f3;
+  --c-white: #f6f3ec;
   --c-white-pure: #ffffff;
   --c-ink: #121214;
   --c-muted: #9a9aa4;
   --c-muted-light: #6b6b74;
   --c-line: rgba(255, 255, 255, 0.1);
   --c-line-dark: rgba(18, 18, 20, 0.1);
-  --c-accent: #ff4b1f;
-  --c-accent-dark: #d93c14;
-  --c-accent-light: #ff7a4d;
-  --c-accent-soft: rgba(255, 75, 31, 0.12);
+  --c-accent: #7d2b3a;
+  --c-accent-dark: #5c1f2a;
+  --c-accent-light: #a8455a;
+  --c-accent-soft: rgba(125, 43, 58, 0.12);
 
   --font-display: 'Anton', 'Inter', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -220,13 +220,15 @@ h1, h2, h3, h4 {
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-size: 22px;
-  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
   color: var(--c-white);
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 2px;
 }
 .logo .dot { color: var(--c-accent); }
 
@@ -581,17 +583,16 @@ h1, h2, h3, h4 {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  background: #eeece5;
 }
-.product-media svg.tile-icon {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 46%;
-  height: 46%;
-  color: rgba(255,255,255,0.92);
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   transition: transform .6s var(--ease);
 }
-.product-card:hover .product-media svg.tile-icon { transform: scale(1.06) rotate(-2deg); }
+.product-card:hover .product-media img { transform: scale(1.05); }
 
 .product-badge {
   position: absolute;
@@ -717,14 +718,6 @@ h1, h2, h3, h4 {
   display: flex;
   justify-content: center;
 }
-
-/* Tile gradient variants */
-.tile-1 { background: linear-gradient(150deg, #ff4b1f 0%, #7a1206 100%); }
-.tile-2 { background: linear-gradient(150deg, #23232a 0%, #0a0a0c 100%); }
-.tile-3 { background: linear-gradient(150deg, #3b3b44 0%, #101013 100%); }
-.tile-4 { background: linear-gradient(150deg, #ff7a4d 0%, #a3280c 100%); }
-.tile-5 { background: linear-gradient(150deg, #4a4a54 0%, #0a0a0c 100%); }
-.tile-6 { background: linear-gradient(150deg, #d93c14 0%, #2b0a03 100%); }
 
 /* ---------- Categories ---------- */
 .section-categories {
@@ -1084,11 +1077,14 @@ h1, h2, h3, h4 {
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4/5;
+  background: #eeece5;
 }
-.pdp-gallery-main svg.tile-icon {
-  position: absolute; inset: 0; margin: auto;
-  width: 42%; height: 42%;
-  color: rgba(255,255,255,0.92);
+.pdp-gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 .pdp-thumbs {
   display: flex;
@@ -1102,9 +1098,11 @@ h1, h2, h3, h4 {
   overflow: hidden;
   border: 2px solid transparent;
   cursor: pointer;
+  background: #eeece5;
+  padding: 0;
 }
 .pdp-thumb.active { border-color: var(--c-ink); }
-.pdp-thumb svg { position: absolute; inset: 0; margin: auto; width: 46%; height: 46%; color: rgba(255,255,255,0.92); }
+.pdp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .pdp-info .product-badge { position: static; display: inline-flex; margin-bottom: 16px; }
 .pdp-title { font-size: clamp(30px, 4vw, 44px); margin-bottom: 10px; }

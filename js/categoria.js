@@ -25,7 +25,7 @@
   var emptyEl = document.getElementById('categoryEmpty');
 
   var label = catalog.categoryLabels[cat];
-  document.title = label + ' — Vortex Crew';
+  document.title = label + ' — roots co.';
   if (titleEl) titleEl.textContent = label;
   if (breadcrumbEl) breadcrumbEl.textContent = label;
 
@@ -120,11 +120,6 @@
   }
 
   /* ---------- Render ---------- */
-  function iconSvg(type) {
-    return '<svg class="tile-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
-      catalog.iconMarkup(type) + '</svg>';
-  }
-
   function cardHtml(p) {
     var badge = p.badge ? '<span class="product-badge' + (p.badge === 'Más vendida' ? ' accent' : '') + '">' + p.badge + '</span>' : '';
     var sizePills = p.sizes.map(function (s, i) {
@@ -136,9 +131,9 @@
 
     return (
       '<a href="producto.html" class="product-card" data-reveal>' +
-        '<div class="product-media ' + p.tile + '">' +
+        '<div class="product-media">' +
           badge +
-          iconSvg(p.icon) +
+          '<img src="' + p.images[0] + '" alt="' + p.name + '" loading="lazy" />' +
           '<button class="product-quick" type="button" aria-label="Vista rápida" data-quickview>' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' +
           '</button>' +
