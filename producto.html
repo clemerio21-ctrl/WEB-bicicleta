@@ -69,7 +69,7 @@
     <span class="sep">/</span>
     <a href="index.html#destacados">Catálogo</a>
     <span class="sep">/</span>
-    <span class="current">Polera Araucaria</span>
+    <span class="current" id="breadcrumbCurrent">Polera Araucaria</span>
   </nav>
 </div>
 
@@ -83,7 +83,7 @@
         <div class="pdp-gallery-main" id="galleryMain">
           <img src="assets/images/productos/poleras/polera-araucaria-1.jpg" alt="Polera Araucaria, vista frontal" />
         </div>
-        <div class="pdp-thumbs">
+        <div class="pdp-thumbs" id="pdpThumbs">
           <button class="pdp-thumb active" type="button" data-full="assets/images/productos/poleras/polera-araucaria-1.jpg" aria-label="Ver foto 1">
             <img src="assets/images/productos/poleras/polera-araucaria-1.jpg" alt="" />
           </button>
@@ -98,11 +98,11 @@
 
       <!-- Info -->
       <div class="pdp-info">
-        <span class="product-badge accent">Más vendida</span>
-        <h1 class="pdp-title">Polera Araucaria</h1>
-        <p class="pdp-price">$27.990</p>
+        <span class="product-badge accent" id="pdpBadge">Más vendida</span>
+        <h1 class="pdp-title" id="pdpTitle">Polera Araucaria</h1>
+        <p class="pdp-price" id="pdpPrice">$27.990</p>
 
-        <p class="pdp-desc">
+        <p class="pdp-desc" id="pdpDesc">
           Polera técnica manga corta con gráfica inspirada en la araucaria andina. Tela liviana de secado rápido,
           pensada para rodar en el trail y para el después. Texto de ejemplo — descripción real se define con el cliente.
         </p>
@@ -112,7 +112,7 @@
             <span class="label">Talla</span>
             <a href="#" class="guide">Guía de talles</a>
           </div>
-          <div class="pdp-sizes" data-size-group>
+          <div class="pdp-sizes" data-size-group id="pdpSizes">
             <button type="button" class="pdp-size">S</button>
             <button type="button" class="pdp-size active">M</button>
             <button type="button" class="pdp-size">L</button>
@@ -125,7 +125,7 @@
             <span class="label">Color</span>
             <span class="value" id="colorValue">Concho Vino</span>
           </div>
-          <div class="pdp-colors" data-color-group>
+          <div class="pdp-colors" data-color-group id="pdpColors">
             <button type="button" class="pdp-color active" data-color-name="Concho Vino"><span style="background:#7d2b3a"></span></button>
           </div>
         </div>
@@ -206,47 +206,7 @@
       </div>
     </div>
 
-    <div class="product-grid">
-      <a href="producto.html" class="product-card" data-reveal>
-        <div class="product-media">
-          <img src="assets/images/productos/poleras/polera-hit-the-road-1.jpg" alt="Polera Hit The Road" loading="lazy" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Polera Hit The Road</h3>
-          <p class="product-price">$27.990</p>
-          <button class="product-add" type="button" data-add-cart data-name="Polera Hit The Road">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            Agregar
-          </button>
-        </div>
-      </a>
-      <a href="producto.html" class="product-card" data-reveal>
-        <div class="product-media">
-          <img src="assets/images/productos/shorts/short-roots-1.jpg" alt="Short Roots" loading="lazy" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Short Roots</h3>
-          <p class="product-price">$24.990</p>
-          <button class="product-add" type="button" data-add-cart data-name="Short Roots">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            Agregar
-          </button>
-        </div>
-      </a>
-      <a href="producto.html" class="product-card" data-reveal>
-        <div class="product-media">
-          <img src="assets/images/productos/calcetines/calcetin-rootsco-1.jpg" alt="Calcetín RootsCo" loading="lazy" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Calcetín RootsCo</h3>
-          <p class="product-price">$7.990</p>
-          <button class="product-add" type="button" data-add-cart data-name="Calcetín RootsCo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            Agregar
-          </button>
-        </div>
-      </a>
-    </div>
+    <div class="product-grid" id="relatedGrid"></div>
   </div>
 </section>
 
@@ -269,7 +229,7 @@
         <ul>
           <li><a href="index.html#destacados">Destacados</a></li>
           <li><a href="index.html#categorias">Categorías</a></li>
-          <li><a href="producto.html">Producto ejemplo</a></li>
+          <li><a href="producto.html?id=polera-araucaria">Producto ejemplo</a></li>
         </ul>
       </div>
 
@@ -340,6 +300,7 @@
 </div>
 
 <script src="js/products.js"></script>
+<script src="js/producto.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

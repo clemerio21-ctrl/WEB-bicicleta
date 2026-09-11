@@ -130,7 +130,7 @@
     }).join('');
 
     return (
-      '<a href="producto.html" class="product-card" data-reveal>' +
+      '<a href="producto.html?id=' + p.id + '" class="product-card" data-reveal>' +
         '<div class="product-media">' +
           badge +
           '<img src="' + p.images[0] + '" alt="' + p.name + '" loading="lazy" />' +
