@@ -30,7 +30,8 @@
         'assets/images/productos/poleras/polera-araucaria-2.jpg',
         'assets/images/productos/poleras/polera-araucaria-3.jpg',
         'assets/images/productos/poleras/polera-araucaria-4.jpg',
-        'assets/images/productos/poleras/polera-araucaria-5.jpg'
+        'assets/images/productos/poleras/polera-araucaria-5.jpg',
+        'assets/images/productos/poleras/polera-araucaria-6.jpg'
       ],
       badge: 'Más vendida',
       dateAdded: '2026-07-10',
@@ -48,7 +49,9 @@
         'assets/images/productos/poleras/polera-campamento-base-2.jpg',
         'assets/images/productos/poleras/polera-campamento-base-3.jpg',
         'assets/images/productos/poleras/polera-campamento-base-4.jpg',
-        'assets/images/productos/poleras/polera-campamento-base-5.jpg'
+        'assets/images/productos/poleras/polera-campamento-base-5.jpg',
+        'assets/images/productos/poleras/polera-campamento-base-6.jpg',
+        'assets/images/productos/poleras/polera-campamento-base-7.jpg'
       ],
       badge: null,
       dateAdded: '2026-06-20',
@@ -96,7 +99,10 @@
       images: [
         'assets/images/productos/poleras/polera-hit-the-road-1.jpg',
         'assets/images/productos/poleras/polera-hit-the-road-2.jpg',
-        'assets/images/productos/poleras/polera-hit-the-road-3.jpg'
+        'assets/images/productos/poleras/polera-hit-the-road-3.jpg',
+        'assets/images/productos/poleras/polera-hit-the-road-4.jpg',
+        'assets/images/productos/poleras/polera-hit-the-road-5.jpg',
+        'assets/images/productos/poleras/polera-hit-the-road-6.jpg'
       ],
       badge: null,
       dateAdded: '2026-04-22',
@@ -161,7 +167,8 @@
         'assets/images/productos/guantes/guante-soja-1.jpg',
         'assets/images/productos/guantes/guante-soja-2.jpg',
         'assets/images/productos/guantes/guante-soja-3.jpg',
-        'assets/images/productos/guantes/guante-soja-4.jpg'
+        'assets/images/productos/guantes/guante-soja-4.jpg',
+        'assets/images/productos/guantes/guante-soja-5.jpg'
       ],
       badge: 'Nuevo',
       dateAdded: '2026-08-30',
