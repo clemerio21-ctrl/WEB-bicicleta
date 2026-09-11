@@ -102,7 +102,8 @@
         'assets/images/productos/poleras/polera-hit-the-road-3.jpg',
         'assets/images/productos/poleras/polera-hit-the-road-4.jpg',
         'assets/images/productos/poleras/polera-hit-the-road-5.jpg',
-        'assets/images/productos/poleras/polera-hit-the-road-6.jpg'
+        'assets/images/productos/poleras/polera-hit-the-road-6.jpg',
+        'assets/images/productos/poleras/polera-hit-the-road-7.jpg'
       ],
       badge: null,
       dateAdded: '2026-04-22',
@@ -128,7 +129,7 @@
       id: 'short-roots',
       name: 'Short Roots',
       price: 24990,
-      category: ['shorts'],
+      category: ['shorts', 'pantalones'],
       sizes: ['S', 'M', 'L', 'XL'],
       colors: [{ name: 'Negro', hex: '#16161a' }],
       images: [
