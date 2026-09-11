@@ -28,7 +28,9 @@
       images: [
         'assets/images/productos/poleras/polera-araucaria-1.jpg',
         'assets/images/productos/poleras/polera-araucaria-2.jpg',
-        'assets/images/productos/poleras/polera-araucaria-3.jpg'
+        'assets/images/productos/poleras/polera-araucaria-3.jpg',
+        'assets/images/productos/poleras/polera-araucaria-4.jpg',
+        'assets/images/productos/poleras/polera-araucaria-5.jpg'
       ],
       badge: 'Más vendida',
       dateAdded: '2026-07-10',
@@ -44,7 +46,9 @@
       images: [
         'assets/images/productos/poleras/polera-campamento-base-1.jpg',
         'assets/images/productos/poleras/polera-campamento-base-2.jpg',
-        'assets/images/productos/poleras/polera-campamento-base-3.jpg'
+        'assets/images/productos/poleras/polera-campamento-base-3.jpg',
+        'assets/images/productos/poleras/polera-campamento-base-4.jpg',
+        'assets/images/productos/poleras/polera-campamento-base-5.jpg'
       ],
       badge: null,
       dateAdded: '2026-06-20',
@@ -107,7 +111,8 @@
       colors: [{ name: 'Negro', hex: '#16161a' }],
       images: [
         'assets/images/productos/pantalones/pantalon-long-roots-1.jpg',
-        'assets/images/productos/pantalones/pantalon-long-roots-2.jpg'
+        'assets/images/productos/pantalones/pantalon-long-roots-2.jpg',
+        'assets/images/productos/pantalones/pantalon-long-roots-3.jpg'
       ],
       badge: 'Nuevo',
       dateAdded: '2026-08-28',
@@ -155,7 +160,8 @@
       images: [
         'assets/images/productos/guantes/guante-soja-1.jpg',
         'assets/images/productos/guantes/guante-soja-2.jpg',
-        'assets/images/productos/guantes/guante-soja-3.jpg'
+        'assets/images/productos/guantes/guante-soja-3.jpg',
+        'assets/images/productos/guantes/guante-soja-4.jpg'
       ],
       badge: 'Nuevo',
       dateAdded: '2026-08-30',
@@ -231,7 +237,8 @@
       colors: [{ name: 'Transparente', hex: '#eae7df' }],
       images: [
         'assets/images/productos/botellas/botella-hit-the-road-1.jpg',
-        'assets/images/productos/botellas/botella-hit-the-road-2.jpg'
+        'assets/images/productos/botellas/botella-hit-the-road-2.jpg',
+        'assets/images/productos/botellas/botella-hit-the-road-3.jpg'
       ],
       badge: null,
       dateAdded: '2026-05-05',
