@@ -30,7 +30,6 @@
         'assets/images/productos/poleras/polera-araucaria-2.jpg',
         'assets/images/productos/poleras/polera-araucaria-3.jpg',
         'assets/images/productos/poleras/polera-araucaria-4.jpg',
-        'assets/images/productos/poleras/polera-araucaria-5.jpg',
         'assets/images/productos/poleras/polera-araucaria-6.jpg'
       ],
       badge: 'Más vendida',
