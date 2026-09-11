@@ -38,9 +38,7 @@
   if (priceEl) priceEl.textContent = catalog.formatPrice(product.price);
 
   var descEl = document.getElementById('pdpDesc');
-  if (descEl) {
-    descEl.textContent = (product.desc || '') + ' Texto de ejemplo — descripción real se define con el cliente.';
-  }
+  if (descEl) descEl.textContent = product.desc || '';
 
   /* ---------- Gallery ---------- */
   var galleryMain = document.getElementById('galleryMain');

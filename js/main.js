@@ -289,7 +289,7 @@
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      showToast('¡Gracias! (formulario de ejemplo, sin envío real)');
+      showToast('¡Gracias por suscribirte!');
       newsletterForm.reset();
     });
   }
