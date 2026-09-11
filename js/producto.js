@@ -40,6 +40,14 @@
   var descEl = document.getElementById('pdpDesc');
   if (descEl) descEl.textContent = product.desc || '';
 
+  /* ---------- Detalles ---------- */
+  var detailsEl = document.getElementById('pdpDetails');
+  if (detailsEl) {
+    var details = ['Producto de calidad.'];
+    if (product.category.indexOf('poleras') !== -1) details.push('Cierre incluido.');
+    detailsEl.innerHTML = details.map(function (d) { return '<li>' + d + '</li>'; }).join('');
+  }
+
   /* ---------- Gallery ---------- */
   var galleryMain = document.getElementById('galleryMain');
   if (galleryMain) {
