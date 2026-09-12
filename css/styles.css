@@ -146,6 +146,7 @@ h1, h2, h3, h4 {
   color: var(--c-white);
 }
 .btn-dark:hover { background: var(--c-black); transform: translateY(-2px); }
+.btn:active { transform: scale(0.97); transition-duration: .12s; }
 
 .btn-block { width: 100%; }
 .btn-sm { padding: 11px 22px; font-size: 12px; }
@@ -288,7 +289,9 @@ h1, h2, h3, h4 {
   font-size: 9.5px;
   font-weight: 800;
   display: flex; align-items: center; justify-content: center;
+  transition: transform .22s var(--ease);
 }
+.cart-count.is-bump { transform: scale(1.35); }
 .nav-toggle {
   display: inline-flex;
   color: var(--c-white);
@@ -711,6 +714,7 @@ h1, h2, h3, h4 {
   transition: background .25s ease, transform .25s ease;
 }
 .product-add:hover { background: var(--c-accent); }
+.product-add:active { transform: scale(0.97); transition-duration: .12s; }
 .product-add svg { width: 15px; height: 15px; }
 
 .products-foot {
@@ -1085,7 +1089,9 @@ h1, h2, h3, h4 {
   object-fit: cover;
   object-position: top center;
   display: block;
+  transition: opacity .18s var(--ease);
 }
+.pdp-gallery-main img.is-swapping { opacity: 0; }
 .pdp-thumbs {
   display: flex;
   gap: 12px;

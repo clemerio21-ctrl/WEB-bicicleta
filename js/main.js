@@ -195,6 +195,15 @@
 
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll('[data-reveal]');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var revealDelayCounts = new Map();
+    revealEls.forEach(function (el) {
+      var parent = el.parentElement;
+      var count = revealDelayCounts.get(parent) || 0;
+      if (count > 0) el.style.transitionDelay = (Math.min(count, 4) * 50) + 'ms';
+      revealDelayCounts.set(parent, count + 1);
+    });
+  }
   if ('IntersectionObserver' in window && revealEls.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -240,7 +249,13 @@
     if (!addBtn) return;
     e.preventDefault();
     cartCount += 1;
-    cartCountEls.forEach(function (el) { el.textContent = cartCount; });
+    cartCountEls.forEach(function (el) {
+      el.textContent = cartCount;
+      el.classList.remove('is-bump');
+      void el.offsetWidth;
+      el.classList.add('is-bump');
+      setTimeout(function () { el.classList.remove('is-bump'); }, 220);
+    });
     var name = addBtn.getAttribute('data-name') || 'Producto';
     showToast(name + ' agregado al carrito (demo)');
   });
@@ -302,7 +317,14 @@
       thumb.classList.add('active');
       if (galleryMain) {
         var img = galleryMain.querySelector('img');
-        if (img) img.src = thumb.getAttribute('data-full');
+        var nextSrc = thumb.getAttribute('data-full');
+        if (img && img.src.indexOf(nextSrc) === -1) {
+          img.classList.add('is-swapping');
+          setTimeout(function () {
+            img.src = nextSrc;
+            img.classList.remove('is-swapping');
+          }, 140);
+        }
       }
     });
   });
