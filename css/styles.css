@@ -1163,6 +1163,23 @@ h1, h2, h3, h4 {
 }
 .pdp-size:hover { border-color: var(--c-ink); }
 .pdp-size.active { background: var(--c-ink); border-color: var(--c-ink); color: #fff; }
+.pdp-size.is-agotado {
+  position: relative;
+  color: var(--c-muted-light);
+  border-color: rgba(18,18,20,0.08);
+  background: rgba(18,18,20,0.03);
+  cursor: not-allowed;
+}
+.pdp-size.is-agotado::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 1.5px;
+  background: currentColor;
+  transform: rotate(-10deg);
+}
 
 .pdp-colors { display: flex; gap: 12px; }
 .pdp-color {

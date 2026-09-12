@@ -24,6 +24,7 @@
       price: 27990,
       category: ['poleras'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 10, M: 24, L: 25, XL: 11 },
       colors: [{ name: 'Concho Vino', hex: '#7d2b3a' }],
       images: [
         'assets/images/productos/poleras/polera-araucaria-1.jpg',
@@ -42,6 +43,7 @@
       price: 27990,
       category: ['poleras'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 10, M: 24, L: 26, XL: 11 },
       colors: [{ name: 'Verde Agua', hex: '#8fb7ae' }],
       images: [
         'assets/images/productos/poleras/polera-campamento-base-1.jpg',
@@ -62,6 +64,7 @@
       price: 27990,
       category: ['poleras'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 10, M: 24, L: 25, XL: 11 },
       colors: [{ name: 'Azul', hex: '#3b3f72' }],
       images: [
         'assets/images/productos/poleras/polera-combi-1.jpg',
@@ -78,6 +81,7 @@
       price: 27990,
       category: ['poleras'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 10, M: 24, L: 25, XL: 11 },
       colors: [{ name: 'Verde Militar', hex: '#7d7a54' }],
       images: [
         'assets/images/productos/poleras/polera-defender-1.jpg',
@@ -94,6 +98,7 @@
       price: 27990,
       category: ['poleras'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 10, M: 24, L: 25, XL: 11 },
       colors: [{ name: 'Morada', hex: '#9b7fc7' }],
       images: [
         'assets/images/productos/poleras/polera-hit-the-road-1.jpg',
@@ -114,6 +119,7 @@
       price: 39990,
       category: ['pantalones'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 10, M: 20, L: 14, XL: 8 },
       colors: [{ name: 'Negro', hex: '#16161a' }],
       images: [
         'assets/images/productos/pantalones/pantalon-long-roots-1.jpg',
@@ -130,6 +136,7 @@
       price: 24990,
       category: ['shorts', 'pantalones'],
       sizes: ['S', 'M', 'L', 'XL'],
+      stock: { S: 16, M: 35, L: 24, XL: 8 },
       colors: [{ name: 'Negro', hex: '#16161a' }],
       images: [
         'assets/images/productos/shorts/short-roots-1.jpg',
@@ -146,6 +153,7 @@
       price: 14990,
       category: ['guantes', 'accesorios'],
       sizes: ['S/M', 'L/XL'],
+      stock: { 'S/M': 22, 'L/XL': 48 },
       colors: [{ name: 'Negro', hex: '#16161a' }],
       images: [
         'assets/images/productos/guantes/guante-black-sabath-1.jpg',
@@ -162,6 +170,7 @@
       price: 14990,
       category: ['guantes', 'accesorios'],
       sizes: ['S/M', 'L/XL'],
+      stock: { 'S/M': 22, 'L/XL': 48 },
       colors: [{ name: 'Verde Militar', hex: '#6f7a52' }],
       images: [
         'assets/images/productos/guantes/guante-soja-1.jpg',
@@ -180,6 +189,7 @@
       price: 16990,
       category: ['cinturones', 'accesorios'],
       sizes: ['Única'],
+      stock: { 'Única': 99 },
       colors: [{ name: 'Verde Militar', hex: '#6f7a52' }],
       images: [
         'assets/images/productos/cinturones/cinturon-leaf-1.jpg',
@@ -196,6 +206,7 @@
       price: 7990,
       category: ['calcetines', 'accesorios'],
       sizes: ['Única'],
+      stock: { 'Única': 300 },
       colors: [{ name: 'Verde Bosque', hex: '#5f7a5a' }],
       images: [
         'assets/images/productos/calcetines/calcetin-rootsco-1.jpg',
@@ -211,6 +222,7 @@
       price: 9990,
       category: ['botellas', 'accesorios'],
       sizes: ['Única'],
+      stock: { 'Única': 100 },
       colors: [{ name: 'Negra', hex: '#16161a' }],
       images: [
         'assets/images/productos/botellas/botella-campamento-base-1.jpg',
@@ -226,6 +238,7 @@
       price: 9990,
       category: ['botellas', 'accesorios'],
       sizes: ['Única'],
+      stock: { 'Única': 100 },
       colors: [{ name: 'Turquesa', hex: '#3fb6ae' }],
       images: [
         'assets/images/productos/botellas/botella-combi-1.jpg',
@@ -241,6 +254,7 @@
       price: 9990,
       category: ['botellas', 'accesorios'],
       sizes: ['Única'],
+      stock: { 'Única': 100 },
       colors: [{ name: 'Transparente', hex: '#eae7df' }],
       images: [
         'assets/images/productos/botellas/botella-hit-the-road-1.jpg',

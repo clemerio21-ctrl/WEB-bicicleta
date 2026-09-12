@@ -65,8 +65,15 @@
   /* ---------- Sizes ---------- */
   var sizesEl = document.getElementById('pdpSizes');
   if (sizesEl) {
+    var firstAvailable = product.sizes.findIndex(function (s) {
+      return !product.stock || product.stock[s] > 0;
+    });
+    if (firstAvailable === -1) firstAvailable = 0;
+
     sizesEl.innerHTML = product.sizes.map(function (s, i) {
-      return '<button type="button" class="pdp-size' + (i === 0 ? ' active' : '') + '">' + s + '</button>';
+      var outOfStock = product.stock && !(product.stock[s] > 0);
+      var classes = 'pdp-size' + (i === firstAvailable ? ' active' : '') + (outOfStock ? ' is-agotado' : '');
+      return '<button type="button" class="' + classes + '"' + (outOfStock ? ' disabled aria-label="' + s + ' (agotado)"' : '') + '>' + s + '</button>';
     }).join('');
   }
 

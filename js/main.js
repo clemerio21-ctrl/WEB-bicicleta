@@ -212,7 +212,7 @@
   /* ---------- Size / color pill selection (event delegation) ---------- */
   document.addEventListener('click', function (e) {
     var sizeBtn = e.target.closest('.size-pill, .pdp-size');
-    if (sizeBtn) {
+    if (sizeBtn && !sizeBtn.disabled && !sizeBtn.classList.contains('is-agotado')) {
       var group = sizeBtn.parentElement;
       group.querySelectorAll('.size-pill, .pdp-size').forEach(function (b) { b.classList.remove('active'); });
       sizeBtn.classList.add('active');
