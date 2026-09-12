@@ -104,6 +104,7 @@ h1, h2, h3, h4 {
 
 .section-title {
   font-size: clamp(30px, 4.4vw, 48px);
+  letter-spacing: -0.015em;
 }
 
 .section-sub {
@@ -192,6 +193,11 @@ h1, h2, h3, h4 {
 }
 @media (prefers-reduced-motion: reduce) {
   .announce-track { animation: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-header.is-solid { background: var(--c-black); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .search-overlay { background: var(--c-black); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .about-stats { background: var(--c-black); backdrop-filter: none; }
 }
 
 /* ---------- Header ---------- */
@@ -334,7 +340,9 @@ h1, h2, h3, h4 {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: rgba(10, 10, 12, 0.97);
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -472,6 +480,7 @@ h1, h2, h3, h4 {
 
 .hero-title {
   font-size: clamp(48px, 11vw, 128px);
+  letter-spacing: -0.03em;
   color: var(--c-white-pure);
   max-width: 16ch;
 }
@@ -1000,7 +1009,8 @@ h1, h2, h3, h4 {
   box-shadow: 0 30px 60px -16px rgba(0, 0, 0, 0.35);
   padding: 20px;
   opacity: 0;
-  transform: translateY(16px) scale(0.97);
+  transform-origin: bottom right;
+  transform: translateY(10px) scale(0.92);
   pointer-events: none;
   transition: opacity .3s var(--ease), transform .3s var(--ease);
 }
@@ -1111,7 +1121,7 @@ h1, h2, h3, h4 {
 .pdp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .pdp-info .product-badge { position: static; display: inline-flex; margin-bottom: 16px; }
-.pdp-title { font-size: clamp(30px, 4vw, 44px); margin-bottom: 10px; }
+.pdp-title { font-size: clamp(30px, 4vw, 44px); letter-spacing: -0.015em; margin-bottom: 10px; }
 .pdp-price { font-size: 24px; font-weight: 800; color: var(--c-accent); margin-bottom: 22px; }
 .pdp-price .old { color: var(--c-muted-light); text-decoration: line-through; font-weight: 500; font-size: 17px; margin-left: 10px; }
 
@@ -1123,6 +1133,7 @@ h1, h2, h3, h4 {
 .legal-page h1 {
   font-family: var(--font-display);
   font-size: clamp(30px, 4.4vw, 44px);
+  letter-spacing: -0.015em;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -1275,7 +1286,7 @@ h1, h2, h3, h4 {
   padding: 24px 0 0;
   background: var(--c-white);
 }
-.category-title { font-size: clamp(32px, 5vw, 52px); margin-bottom: 4px; }
+.category-title { font-size: clamp(32px, 5vw, 52px); letter-spacing: -0.015em; margin-bottom: 4px; }
 .category-desc { color: var(--c-muted-light); font-size: 15px; max-width: 56ch; margin-top: 10px; }
 
 .category-toolbar {
