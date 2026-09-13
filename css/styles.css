@@ -1317,10 +1317,6 @@ h1, h2, h3, h4 {
 }
 .accordion-panel ul { padding-left: 18px; list-style: disc; }
 
-.section-faq { background: var(--c-white); padding: 30px 0 100px; }
-.faq-accordion { max-width: 760px; margin: 0 auto; }
-.faq-accordion .accordion-btn { font-size: 15px; }
-
 .related {
   padding: 0 0 110px;
 }
