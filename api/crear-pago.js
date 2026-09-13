@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
           }
         ],
         back_urls: {
-          success: origin + '/producto.html?pago=exito',
+          success: origin + '/gracias.html',
           failure: origin + '/producto.html?pago=fallo',
           pending: origin + '/producto.html?pago=pendiente'
         },

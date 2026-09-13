@@ -26,6 +26,10 @@
 
   var label = catalog.categoryLabels[cat];
   document.title = label + ' — roots co.';
+  var metaDescEl = document.querySelector('meta[name="description"]');
+  if (metaDescEl) {
+    metaDescEl.setAttribute('content', label + ' roots co. — ' + baseProducts.length + ' producto' + (baseProducts.length === 1 ? '' : 's') + '. Filtra por talla y color, ordena por precio o novedad.');
+  }
   if (titleEl) titleEl.textContent = label;
   if (breadcrumbEl) breadcrumbEl.textContent = label;
 

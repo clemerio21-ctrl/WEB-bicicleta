@@ -14,6 +14,10 @@
   if (!product) product = catalog.products[0];
 
   document.title = product.name + ' — roots co.';
+  var metaDescEl = document.querySelector('meta[name="description"]');
+  if (metaDescEl) {
+    metaDescEl.setAttribute('content', product.name + ' — roots co. ' + (product.desc || 'Indumentaria técnica para el trail y MTB.') + ' ' + catalog.formatPrice(product.price) + '.');
+  }
 
   var breadcrumbEl = document.getElementById('breadcrumbCurrent');
   if (breadcrumbEl) breadcrumbEl.textContent = product.name;
@@ -92,6 +96,26 @@
   if (buyBtn) buyBtn.setAttribute('data-product-id', product.id);
   var addCartBtn = document.getElementById('addCartBtn');
   if (addCartBtn) addCartBtn.setAttribute('data-name', product.name);
+
+  /* ---------- Sticky buy bar (solo mobile): aparece cuando el botón
+     "Comprar ahora" original sale de la pantalla al hacer scroll ---------- */
+  var stickyBuy = document.getElementById('stickyBuy');
+  var stickyBuyBtn = document.getElementById('stickyBuyBtn');
+  if (stickyBuy && buyBtn) {
+    var stickyNameEl = document.getElementById('stickyBuyName');
+    var stickyPriceEl = document.getElementById('stickyBuyPrice');
+    if (stickyNameEl) stickyNameEl.textContent = product.name;
+    if (stickyPriceEl) stickyPriceEl.textContent = catalog.formatPrice(product.price);
+    if (stickyBuyBtn) stickyBuyBtn.addEventListener('click', function () { buyBtn.click(); });
+    if ('IntersectionObserver' in window) {
+      var stickyIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          stickyBuy.classList.toggle('is-visible', !entry.isIntersecting);
+        });
+      }, { threshold: 0 });
+      stickyIo.observe(buyBtn);
+    }
+  }
 
   /* ---------- Related products: mismas categorías primero ---------- */
   var relatedEl = document.getElementById('relatedGrid');
