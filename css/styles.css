@@ -1044,6 +1044,7 @@ h1, h2, h3, h4 {
 .contact-form input:focus,
 .contact-form textarea:focus { outline: 2px solid var(--c-accent-soft); border-color: var(--c-accent); }
 .contact-form .btn { width: 100%; justify-content: center; padding: 12px; font-size: 13px; margin-top: 2px; }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
 @media (max-width: 480px) {
   .contact-panel { right: 12px; left: 12px; width: auto; bottom: 84px; }

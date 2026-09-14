@@ -24,8 +24,13 @@ module.exports = async function handler(req, res) {
 
   var body = req.body || {};
   var productId = body.productId;
-  var item = CATALOGO[productId];
-  if (!item) {
+  /* Object.prototype.hasOwnProperty evita que alguien pase productId como
+     "constructor", "toString", etc. y reciba una propiedad heredada del
+     objeto en vez de "no encontrado" (lo que mandaría un pago sin precio). */
+  var item = (typeof productId === 'string' && Object.prototype.hasOwnProperty.call(CATALOGO, productId))
+    ? CATALOGO[productId]
+    : null;
+  if (!item || typeof item.price !== 'number' || !(item.price > 0)) {
     res.status(400).json({ error: 'Producto no reconocido.' });
     return;
   }

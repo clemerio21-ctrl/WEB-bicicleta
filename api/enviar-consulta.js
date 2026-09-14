@@ -22,12 +22,29 @@ module.exports = async function handler(req, res) {
   }
 
   var body = req.body || {};
-  var nombre = (body.nombre || '').toString().trim();
-  var correo = (body.correo || '').toString().trim();
-  var mensaje = (body.mensaje || '').toString().trim();
+
+  /* Campo trampa: invisible para personas, pero un bot que llena todos los
+     inputs del formulario lo va a completar. Si viene con contenido,
+     respondemos "éxito" sin mandar nada, para no delatar el filtro. */
+  if ((body.empresa || '').toString().trim()) {
+    res.status(200).json({ ok: true });
+    return;
+  }
+
+  var stripControlChars = function (s) { return s.replace(/[\r\n\t]/g, ' '); };
+
+  var nombre = stripControlChars((body.nombre || '').toString().trim()).slice(0, 100);
+  var correo = stripControlChars((body.correo || '').toString().trim()).slice(0, 200);
+  var mensaje = (body.mensaje || '').toString().trim().slice(0, 3000);
 
   if (!nombre || !correo || !mensaje) {
     res.status(400).json({ error: 'Completa nombre, correo y mensaje.' });
+    return;
+  }
+
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(correo)) {
+    res.status(400).json({ error: 'Ingresa un correo válido.' });
     return;
   }
 

@@ -174,7 +174,8 @@
         body: JSON.stringify({
           nombre: contactForm.nombre.value.trim(),
           correo: contactForm.correo.value.trim(),
-          mensaje: contactForm.mensaje.value.trim()
+          mensaje: contactForm.mensaje.value.trim(),
+          empresa: contactForm.empresa.value
         })
       })
         .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
