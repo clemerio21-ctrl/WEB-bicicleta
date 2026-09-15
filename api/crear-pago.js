@@ -10,6 +10,13 @@ var CATALOGO = {
   'polera-araucaria': { title: 'Polera Araucaria', price: 27990 }
 };
 
+// Costo de envío por zona (confirmado con el cliente). Igual que el precio
+// del producto, se calcula acá y no se confía en nada que mande el navegador.
+var COSTOS_ENVIO = { rm: 3990, otras: 6990 };
+
+var stripControlChars = function (s) { return s.replace(/[\r\n\t]/g, ' '); };
+var limpiar = function (v, max) { return stripControlChars((v || '').toString().trim()).slice(0, max); };
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Método no permitido' });
@@ -35,6 +42,22 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  var zona = body.zona;
+  var costoEnvio = Object.prototype.hasOwnProperty.call(COSTOS_ENVIO, zona) ? COSTOS_ENVIO[zona] : null;
+  if (costoEnvio === null) {
+    res.status(400).json({ error: 'Selecciona a qué zona enviamos tu pedido.' });
+    return;
+  }
+
+  var nombre = limpiar(body.nombre, 150);
+  var direccion = limpiar(body.direccion, 200);
+  var comuna = limpiar(body.comuna, 100);
+  var telefono = limpiar(body.telefono, 40);
+  if (!nombre || !direccion || !comuna || !telefono) {
+    res.status(400).json({ error: 'Completa todos los datos de entrega.' });
+    return;
+  }
+
   var proto = req.headers['x-forwarded-proto'] || 'https';
   var origin = proto + '://' + req.headers.host;
 
@@ -54,6 +77,24 @@ module.exports = async function handler(req, res) {
             currency_id: 'CLP'
           }
         ],
+        shipments: {
+          cost: costoEnvio,
+          mode: 'not_specified'
+        },
+        payer: {
+          name: nombre,
+          phone: { number: telefono },
+          address: { street_name: direccion + ', ' + comuna }
+        },
+        /* Queda guardado junto al pago en Mercado Pago (se puede consultar
+           desde su panel o la API) para saber dónde despachar el pedido. */
+        metadata: {
+          nombre: nombre,
+          direccion: direccion,
+          comuna: comuna,
+          telefono: telefono,
+          zona: zona
+        },
         back_urls: {
           success: origin + '/gracias.html',
           failure: origin + '/producto.html?pago=fallo',

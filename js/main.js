@@ -261,17 +261,61 @@
     showToast(name + ' agregado al carrito (demo)');
   });
 
+  /* ---------- Compra: pide datos de entrega antes de ir a pagar ---------- */
   var buyBtn = document.getElementById('buyBtn');
-  if (buyBtn) {
-    buyBtn.addEventListener('click', function () {
-      var originalLabel = buyBtn.textContent;
-      buyBtn.disabled = true;
-      buyBtn.textContent = 'Redirigiendo...';
+  var checkoutOverlay = document.getElementById('checkoutOverlay');
+  var checkoutClose = document.getElementById('checkoutClose');
+  var checkoutForm = document.getElementById('checkoutForm');
+  var checkoutZona = document.getElementById('checkoutZona');
+  var checkoutShippingLabel = document.getElementById('checkoutShippingLabel');
+
+  var SHIPPING_LABELS = { rm: 'Región Metropolitana — $3.990', otras: 'Otra región — $6.990' };
+
+  function toggleCheckoutOverlay(open) {
+    if (!checkoutOverlay) return;
+    checkoutOverlay.classList.toggle('is-open', open);
+  }
+
+  if (buyBtn && checkoutOverlay) {
+    buyBtn.addEventListener('click', function () { toggleCheckoutOverlay(true); });
+  }
+  if (checkoutClose) {
+    checkoutClose.addEventListener('click', function () { toggleCheckoutOverlay(false); });
+  }
+  if (checkoutOverlay) {
+    checkoutOverlay.addEventListener('click', function (e) {
+      if (e.target === checkoutOverlay) toggleCheckoutOverlay(false);
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && checkoutOverlay && checkoutOverlay.classList.contains('is-open')) {
+      toggleCheckoutOverlay(false);
+    }
+  });
+  if (checkoutZona && checkoutShippingLabel) {
+    checkoutZona.addEventListener('change', function () {
+      checkoutShippingLabel.textContent = SHIPPING_LABELS[checkoutZona.value] || 'Elige una zona';
+    });
+  }
+
+  if (checkoutForm && buyBtn) {
+    checkoutForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var submitBtn = document.getElementById('checkoutSubmitBtn');
+      var originalLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Redirigiendo...'; }
 
       fetch('/api/crear-pago', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: buyBtn.getAttribute('data-product-id') || 'polera-araucaria' })
+        body: JSON.stringify({
+          productId: buyBtn.getAttribute('data-product-id') || 'polera-araucaria',
+          zona: checkoutForm.zona.value,
+          nombre: checkoutForm.nombre.value.trim(),
+          direccion: checkoutForm.direccion.value.trim(),
+          comuna: checkoutForm.comuna.value.trim(),
+          telefono: checkoutForm.telefono.value.trim()
+        })
       })
         .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
         .then(function (result) {
@@ -280,8 +324,7 @@
         })
         .catch(function (err) {
           showToast(err.message || 'No se pudo iniciar el pago.');
-          buyBtn.disabled = false;
-          buyBtn.textContent = originalLabel;
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
         });
     });
   }

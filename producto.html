@@ -295,6 +295,35 @@
   </form>
 </div>
 
+<!-- ============ Checkout: datos de entrega ============ -->
+<div class="checkout-overlay" id="checkoutOverlay">
+  <div class="checkout-modal">
+    <div class="checkout-modal-head">
+      <span>Datos de entrega</span>
+      <button class="checkout-modal-close" id="checkoutClose" aria-label="Cerrar" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="checkout-modal-hint">Para saber dónde enviarte el pedido y calcular el costo de envío.</p>
+    <form id="checkoutForm" class="checkout-form">
+      <input type="text" name="nombre" placeholder="Nombre completo de quien recibe" required />
+      <input type="text" name="direccion" placeholder="Dirección (calle y número)" required />
+      <input type="text" name="comuna" placeholder="Comuna y ciudad" required />
+      <select name="zona" id="checkoutZona" required>
+        <option value="" disabled selected>¿A qué zona lo enviamos?</option>
+        <option value="rm">Región Metropolitana</option>
+        <option value="otras">Otra región de Chile</option>
+      </select>
+      <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
+      <div class="checkout-summary">
+        <span>Envío</span>
+        <strong id="checkoutShippingLabel">Elige una zona</strong>
+      </div>
+      <button type="submit" class="btn btn-primary" id="checkoutSubmitBtn">Continuar al pago</button>
+    </form>
+  </div>
+</div>
+
 <script src="js/products.js"></script>
 <script src="js/producto.js"></script>
 <script src="js/main.js"></script>
