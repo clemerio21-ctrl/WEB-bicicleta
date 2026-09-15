@@ -49,11 +49,12 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  var nombre = limpiar(body.nombre, 150);
+  var nombre = limpiar(body.nombre, 100);
+  var apellido = limpiar(body.apellido, 100);
   var direccion = limpiar(body.direccion, 200);
   var comuna = limpiar(body.comuna, 100);
   var telefono = limpiar(body.telefono, 40);
-  if (!nombre || !direccion || !comuna || !telefono) {
+  if (!nombre || !apellido || !direccion || !comuna || !telefono) {
     res.status(400).json({ error: 'Completa todos los datos de entrega.' });
     return;
   }
@@ -83,6 +84,7 @@ module.exports = async function handler(req, res) {
         },
         payer: {
           name: nombre,
+          surname: apellido,
           phone: { number: telefono },
           address: { street_name: direccion + ', ' + comuna }
         },
@@ -90,6 +92,7 @@ module.exports = async function handler(req, res) {
            desde su panel o la API) para saber dónde despachar el pedido. */
         metadata: {
           nombre: nombre,
+          apellido: apellido,
           direccion: direccion,
           comuna: comuna,
           telefono: telefono,

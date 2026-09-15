@@ -312,6 +312,7 @@
           productId: buyBtn.getAttribute('data-product-id') || 'polera-araucaria',
           zona: checkoutForm.zona.value,
           nombre: checkoutForm.nombre.value.trim(),
+          apellido: checkoutForm.apellido.value.trim(),
           direccion: checkoutForm.direccion.value.trim(),
           comuna: checkoutForm.comuna.value.trim(),
           telefono: checkoutForm.telefono.value.trim()

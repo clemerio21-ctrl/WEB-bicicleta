@@ -1089,6 +1089,8 @@ h1, h2, h3, h4 {
 .checkout-modal-close svg { width: 20px; height: 20px; }
 .checkout-modal-hint { font-size: 13px; color: var(--c-muted-light); line-height: 1.5; margin-bottom: 16px; }
 .checkout-form { display: flex; flex-direction: column; gap: 10px; }
+.checkout-form-row { display: flex; gap: 10px; }
+.checkout-form-row input { min-width: 0; }
 .checkout-form input,
 .checkout-form select {
   border: 1px solid var(--c-line-dark);
